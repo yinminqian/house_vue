@@ -3,10 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './state/Store'
+import Vuex from 'Vuex'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Sender from './Sender/sender'
 
+
+Vue.use(Vuex)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
@@ -14,8 +18,9 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  created: function () {
-    Sender.post('http://localhost:2333/api/logout', {username: 'yinminqian7', password: '1212'})
+  store,
+  created:function(){
+    this.$store.dispatch('get_location')
   },
   components: {App},
   template: '<App/>'
