@@ -94,7 +94,6 @@
 </template>
 <script>
   import Sender from '../Sender/sender'
-
   export default {
     name: 'nav_title',
     data() {

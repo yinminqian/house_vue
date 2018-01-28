@@ -1,6 +1,8 @@
 import vue from 'vue'
 import vuex from 'vuex'
 import Sender from '../Sender/sender'
+import cfg from '../../.cfg'
+
 
 vue.use(vuex)
 
@@ -20,7 +22,7 @@ const store = new vuex.Store({
   },
   actions: {
     get_location(context) {
-      Sender.post('http://localhost:2333/api/read_location')
+      Sender.post(cfg.api + '/api/read_location')
         .then(function (data) {
           context.commit("location",data)
         });
