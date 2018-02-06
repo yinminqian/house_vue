@@ -12,17 +12,17 @@ module.exports = {
   },
   transform: {
     '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
-    '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest'
+    '.*\\.(vue)$': '<rootDir>/node_modules/house_details.vue-jest'
   },
   testPathIgnorePatterns: [
     '<rootDir>/test/e2e'
   ],
-  snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
+  snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-house_details.vue'],
   setupFiles: ['<rootDir>/test/unit/setup'],
   mapCoverage: true,
   coverageDirectory: '<rootDir>/test/unit/coverage',
   collectCoverageFrom: [
-    'src/**/*.{js,vue}',
+    'src/**/*.{js,house_details.vue}',
     '!src/main.js',
     '!src/router/index.js',
     '!**/node_modules/**'

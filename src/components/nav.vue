@@ -211,7 +211,7 @@
 
 
   .header-btn, .header {
-    color: white;
+    color: black;
   }
 
 

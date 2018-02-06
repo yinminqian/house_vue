@@ -40,16 +40,14 @@
           </el-row>
 
 
-          <el-button>下一步</el-button>
-
-
+          <router-link to="/basics1">
+            <el-button>下一步</el-button>
+          </router-link>
           <el-alert
             title="$$"
             type="success"
             description="我们估计你一个月能赚$3000">
           </el-alert>
-
-
         </div>
 
 
@@ -172,11 +170,10 @@
 
 <script>
   import nav_title from '@/components/nav'
-  import Sender from '../Sender/sender'
   import $ from 'jquery'
 
   export default ({
-    name: 'home',
+    name: 'house_add',
     data() {
       return {
         msg: 'jsidiajdiaj',
@@ -186,7 +183,6 @@
         }],
         value: '',
         state4: '',
-        // restaurants: this.$store.getters.get_location,
         timeout: null,
         hint_: 'niaho'
       }
@@ -197,13 +193,12 @@
     computed: {
       restaurants() {
         return this.$store.getters['get_location'];
-      }
+      },
     },
     methods: {
       querySearchAsync(queryString, cb) {
         var restaurants = this.restaurants;
         var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants;
-        console.log("results", results);
 
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
@@ -235,7 +230,7 @@
 
 
 <style scoped>
-  .test > > > .header-btn, .test > > > .header {
+  .test >>> .header-btn, .test >>> .header {
     color: black;
   }
 

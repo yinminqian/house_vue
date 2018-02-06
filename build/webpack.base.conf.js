@@ -25,7 +25,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
+      'vue$': 'house_details.vue/dist/house_details.vue.esm.js',
       '@': resolve('src'),
     }
   },
@@ -33,7 +33,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: 'house_details.vue-loader',
         options: vueLoaderConfig
       },
       {
