@@ -21,12 +21,12 @@ export default new Router({
     {
       path: '/more_house',
       name: more_house,
-      component:more_house
+      component: more_house
     },
     {
-      path:'/house_material/:id',
+      path: '/house_material/:id',
       props: true,
-      component:house_material
+      component: house_material
     },
     {
       path: '/admin/home',
