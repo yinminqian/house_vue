@@ -140,8 +140,10 @@
             end-placeholder="结束日期"
             :picker-options="pickerOptions1"
           >
-
           </el-date-picker>
+
+
+          <el-button @click="sub_state">提交我的预定</el-button>
         </div>
 
 
@@ -166,29 +168,29 @@
         img_2: '',
         lady: {},
         house_location: {},
-        value6: "",
+        value6: '',
+        house_state: {
+          time_reserve: [],
+          house_id: '',
+          reserve_poke: [],
+        },
         pickerOptions1: {
           disabledDate(time) {
-            let a = [1517932800000, 1517673600000];
-
-            let b = a.findIndex(function (item) {
+            let b = me.house_state.time_reserve.findIndex(function (item) {
               return item == time.getTime();
             })
             return (b != -1);
           },
-
-
         }
       }
     },
     computed: {
-      time_: function () {
-        return [1522944000000, 1523030400000]
-      },
       day() {
         return 24 * 60 * 60 * 1000;
       },
-
+      user_msg: function () {
+        return this.$store.getters['get_user'];
+      }
     },
 
 
@@ -196,36 +198,61 @@
     components: {
       nav_title: nav_title,
     },
-    watch: {
-      value6: function (val) {
-        let day_time = val[1] - val[0];
-        let day_one = val[1] - this.day;
-        console.log("val[1].getTime()",val[0].getTime() < val[1].getTime());
-        console.log("val[1].getTime()",val[1].getTime());
-        console.log("val[0].getTime()",val[0].getTime());
-
-        for (let i = val[0].getTime(); i < val[1].getTime(); i += this.day) {
-          console.log("i",i);
-        }
-
-      }
-    },
 
     created: function () {
+      this.$store.dispatch('is_login');
       let me = this;
       Sender.post(`${cfg.api}/api/house/read_id?id=${this.id}`)
         .then(function (data) {
           me.house_data = data[0];
           me.img_1 = 'http://' + data[0].photo[0];
-          me.img_2 = 'http://' + data[0].photo[1];
           me.house_location = data[0].location
           Sender.post(`${cfg.api}/api/read_user_id?id=${me.house_data.user_id}`)
             .then(function (data) {
               me.lady = data;
             })
+        });
+      Sender.post(cfg.api + '/api/house_state/read_house_id?id=' + this.id)
+        .then(function (data) {
+          me.house_state = data[0];
+          if (me.house_state.reserve_poke == null) {
+            me.house_state.reserve_poke = [];
+          }
         })
     },
-    methods: {},
+    methods: {
+      sub_state: function () {
+        let short_obj = {};
+        let short_arr = [];
+        if (this.value6 == '') {
+          return;
+        } else {
+          this.house_state.house_id = this.id;
+          this.house_state.time_reserve.push(this.value6[1].getTime());
+          short_arr.push(this.value6[1].getTime())
+          for (let i = this.value6[0].getTime(); i < this.value6[1].getTime(); i += this.day) {
+            short_arr.push(i);
+            this.house_state.time_reserve.push(i);
+          }
+        }
+        let su = this.user_msg.id;
+        short_obj[su] = short_arr;
+        this.house_state.reserve_poke.push(short_obj);
+        let me = this;
+        Sender.post(cfg.api + '/api/house_state/add', this.house_state)
+          .then(function (data) {
+            if (data) {
+              Sender.post(cfg.api + '/api/house_state/read_house_id?id=' + me.id)
+                .then(function (data) {
+                  me.time_reserve = data[0].time_reserve;
+                  me.value6 = '';
+                })
+            }
+          });
+
+
+      }
+    },
     mounted: function () {
       new Date().toLocaleDateString();
     }

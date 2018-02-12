@@ -189,7 +189,6 @@ const store = new vuex.Store({
       Sender.post('http://localhost:2333/api/islogin')
         .then(function (data) {
           context.commit('get_user', data.data)
-          return;
         })
     },
     get_independent: function (context) {

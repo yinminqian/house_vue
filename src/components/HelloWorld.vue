@@ -30,7 +30,9 @@
           </div>
         </el-col>
       </div>
+      <router-link to="/more_house">
       <el-button type="primary">查看更多房源</el-button>
+      </router-link>
     </div>
   </div>
 

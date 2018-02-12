@@ -3,27 +3,41 @@
     <div class="nav_show">
       <el-row>
         <el-col :span="12">
-          <div class="header">你好,爱彼迎</div>
+          <router-link to="/">
+            <div class="header">你好,爱彼迎</div>
+
+          </router-link>
         </el-col>
         <el-col :span="12">
 
           <div class="header" style="text-align: right">
-            <router-link to="/home">
+            <router-link to="/house_add">
               <el-button type="text" class="header-btn">发布房源</el-button>
             </router-link>
             <el-button type="text" class="header-btn" v-show="! show_login" @click="dialogloginVisible=true">登录
             </el-button>
             <el-button type="text" class="header-btn" v-show="! show_login" @click="dialogsignupVisible = true">注册
             </el-button>
-            <el-button type="text" class="header-btn">故事</el-button>
+            <router-link to="/story_all">
+              <el-button type="text" class="header-btn">故事</el-button>
+            </router-link>
 
+            <router-link to="/admin/home">
+              <el-button type="text" class="header-btn">管理员面板</el-button>
+            </router-link>
             <el-button type="text" class="header-btn" v-show="show_login">
               <el-dropdown>
   <span class="el-dropdown-link header-btn">
     {{user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>个人设置</el-dropdown-item>
+                  <router-link to="/user_details">
+                    <el-dropdown-item>编辑我的资料</el-dropdown-item>
+                  </router-link>
+                  <router-link to="/user_home_page">
+                    <el-dropdown-item>我的主页</el-dropdown-item>
+                  </router-link>
+
                   <el-dropdown-item @click.native="logout()">登出</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
@@ -94,6 +108,7 @@
 </template>
 <script>
   import Sender from '../Sender/sender'
+
   export default {
     name: 'nav_title',
     data() {

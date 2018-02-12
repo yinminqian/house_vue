@@ -13,11 +13,24 @@ import user_details from '@/components/user_details'
 import user_home_page from '@/components/user_home_page'
 import house_audit from '../components/admin/house_audit'
 import house_details from '../components/admin/house_details'
+import conter_panel from '@/components/landlord/conter_panel'
+import story_all from '@/components/story/story_all'
+
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path:'/story_all',
+      component:story_all,
+    }
+    ,
+    {
+      path: '/conter_panel',
+      component: conter_panel,
+    }
+    ,
     {
       path: '/more_house',
       name: more_house,
