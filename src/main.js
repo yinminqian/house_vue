@@ -9,10 +9,23 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Sender from './Sender/sender'
 
+//Vue的富文编辑器
+
+import vueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+
+
+
+
+
 
 
 Vue.use(Vuex)
 Vue.use(ElementUI)
+Vue.use(vueQuillEditor)
 Vue.config.productionTip = false
 import VueAMap from 'vue-amap';
 
