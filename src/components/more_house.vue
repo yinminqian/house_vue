@@ -11,8 +11,10 @@
             <div v-for="item in house_data">
               <el-col :span="7">
                 <div>
+
                   <img :src="'http://'+item.photo[0]" alt="" style="width: 100%;height: 100%;">
                   <h5>{{item.house_title}}</h5>
+
                 </div>
               </el-col>
             </div>

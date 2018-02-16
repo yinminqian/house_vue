@@ -16,6 +16,7 @@ import house_details from '../components/admin/house_details'
 import conter_panel from '@/components/landlord/conter_panel'
 import story_all from '@/components/story/story_all'
 import ery_story from '@/components/story/ery_story'
+import write_story from '@/components/story/write_story'
 
 
 Vue.use(Router)
@@ -23,7 +24,13 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/ery_story',
+      path: '/write_story',
+      component: write_story
+    }
+    ,
+    {
+      path: '/ery_story/:id',
+      props: true,
       component: ery_story
     },
     {
