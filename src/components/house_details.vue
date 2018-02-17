@@ -176,6 +176,9 @@
         },
         pickerOptions1: {
           disabledDate(time) {
+            if (me.house_state.time_reserve.length == 0) {
+              return
+            }
             let b = me.house_state.time_reserve.findIndex(function (item) {
               return item == time.getTime();
             })
@@ -205,7 +208,8 @@
       Sender.post(`${cfg.api}/api/house/read_id?id=${this.id}`)
         .then(function (data) {
           me.house_data = data[0];
-          me.img_1 = 'http://' + data[0].photo[0];
+          me.img_1 = data[0].photo[0];
+          me.img_2 = data[0].photo[1];
           me.house_location = data[0].location
           Sender.post(`${cfg.api}/api/read_user_id?id=${me.house_data.user_id}`)
             .then(function (data) {
@@ -214,6 +218,9 @@
         });
       Sender.post(cfg.api + '/api/house_state/read_house_id?id=' + this.id)
         .then(function (data) {
+          if (data.length == 0) {
+            return;
+          }
           me.house_state = data[0];
           if (me.house_state.reserve_poke == null) {
             me.house_state.reserve_poke = [];

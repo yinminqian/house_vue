@@ -120,7 +120,6 @@
           phone: '',
           email: '',
           password: '',
-          is_password: '',
         },
         login_form: {
           username: 'yin7',
@@ -165,13 +164,12 @@
         let me = this;
         Sender.post('http://localhost:2333/api/signup', this.form)
           .then(function (data) {
+            console.log("data",data);
             if (data) {
               me.login_btn({username: me.form['username'], password: me.form['password']})
               me.win();
               me.is_login();
             }
-          }, function (data) {
-            // console.log("data1",data);
           })
       },
       login_btn: function (data) {

@@ -9,7 +9,7 @@
     <el-row>
       <el-row >
         <div v-for="item in house_data.photo">
-        <el-col :span="8"><div><img :src="'http://'+item" alt="" style="width: 100%;height: 180px;"></div></el-col>
+        <el-col :span="8"><div><img :src="item" alt="" style="width: 100%;height: 180px;"></div></el-col>
         </div>
       </el-row>
 

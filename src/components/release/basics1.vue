@@ -162,13 +162,13 @@
               <el-select v-model="state" placeholder="例如:北京">
                 <el-option
                   v-for="val in getState"
-                  :value="val.id" :label="val.value"></el-option>
+                  :value="val.id" :label="val.name"></el-option>
               </el-select>
             </el-col>
             <el-col :span="12">
               <h5>城市</h5>
               <el-select v-model="new_house.location.city" placeholder="例如:北京市">
-                <el-option v-for="val in location_array" :value="val.value" :label="val.value"></el-option>
+                <el-option v-for="val in location_array" :value="val.name" :label="val.name"></el-option>
               </el-select>
             </el-col>
             <h5>邮政编码</h5>
@@ -572,6 +572,11 @@
             me.new_house.location.state = item.value;
           }
         })
+         this.getState.filter(function (item) {
+          if (item.id == val) {
+            me.new_house.location.state=item.name;
+          }
+        })
         this.location_array = this.location_.filter(function (item) {
           return item.parent_id == val;
         })
@@ -601,8 +606,8 @@
       get_user() {
         return this.$store.getters['get_user'];
       },
-      new_house(){
-       return  this.$store.getters['get_new_house'];
+      new_house() {
+        return this.$store.getters['get_new_house'];
       }
     },
 
@@ -625,9 +630,9 @@
       test: function () {
         console.log("111", 111);
       },
-      page_add_(){
-       this.new_house.user_id= this.get_user.id;
-        console.log("this.new_house",this.new_house);
+      page_add_() {
+        this.new_house.user_id = this.get_user.id;
+        console.log("this.new_house", this.new_house);
         this.page++;
       }
     },

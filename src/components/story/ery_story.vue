@@ -61,7 +61,6 @@
         let new_time = (new Date()).getTime();
         let time = parseInt((new_time - old_time) / 1000 / 60 / 60 / 24);
         return time;
-
       },
 
     },

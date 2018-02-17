@@ -24,7 +24,7 @@
         <el-col :span="8">
           <div style="width:100%;height:100%;">
             <router-link :to="'/house_material/'+item.id">
-            <img :src="'http://'+item.photo[0]" alt="" style="width: 100%;height: 100%;">
+            <img :src="item.photo[0]" alt="" style="width: 100%;height: 100%;">
             </router-link>
             <h5>{{item.house_title}}</h5>
           </div>
