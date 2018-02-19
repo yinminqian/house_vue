@@ -19,17 +19,32 @@
         </div>
 
         <div class="love_coll">
-          <span>已有{{story.love}}人点赞</span>
-          <span>已有{{story.collect}}人收藏</span>
+          赞:{{story.love}}
+          <br>
+          收藏{{story.collect}}
         </div>
         <div class="uu">
-          <button @click="btn_love">
-            点赞
-          </button>
+          <div>
+            <button v-if="love_show" @click="love_btn">
+              点赞
+            </button>
+            <button v-if="! love_show" @click="yet_love">
+              已赞
+            </button>
+            <button v-if="collect_show" @click="collect_btn">
+              收藏
+            </button>
+          </div>
 
-          <button @click="btn_coll">
-            收藏
-          </button>
+
+          <div>
+
+
+            <button v-if="! collect_show" @click="yet_collect">
+              已经收藏
+            </button>
+
+          </div>
 
         </div>
       </el-col>
@@ -52,12 +67,8 @@
       return {
         story: {},
         writer: {},
-        temporary: {
-          id: me.id,
-          collect: '',
-          love: '',
-          test_: 1,
-        },
+        love_show: '',
+        collect_show: '',
       }
     },
     props: ['id'],
@@ -74,8 +85,10 @@
           Sender.post(`${cfg.api}/api/read_user_id?id=${user_id}`)
             .then(function (data) {
               me.writer = data;
+
             })
         })
+
     },
     computed: {
       time_: function () {
@@ -88,27 +101,8 @@
         return this.$store.getters['get_user'];
       },
     },
+    watch: {},
     methods: {
-
-
-      test: function (data) {
-        if (data.data == null) {
-          data.data = [];
-          data.data.push(this.temporary)
-        } else {
-          let me = this;
-          data.data.forEach(function (item) {
-            if (item.id == me.id) {
-              me.temporary = item;
-              console.log("item",item);
-            } else {
-              data.data.push(this.temporary)
-            }
-          })
-        }
-      },
-
-
       read_content: function (data) {
         let content = document.querySelector('.content');
         content.innerHTML = '';
@@ -116,63 +110,75 @@
         el.innerHTML = `${data.content}`
         el.classList.add('test')
         content.appendChild(el);
+        this.read_love();
+      },
+      collect_btn: function () {
+        this.collect_show = !this.collect_show;
+        this.story.collect++;
+        this.update_story();
+        this.update_collect()
+      },
+
+      love_btn: function () {
+        this.love_show = !this.love_show;
+        this.story.love++;
+        this.update_story();
+        this.update_love();
+      },
+      yet_love: function () {
+        this.love_show = !this.love_show;
+        this.story.love--;
+        this.update_story();
+        this.update_love();
+      },
+      yet_collect: function () {
+        this.collect_show = !this.collect_show;
+        this.story.collect--;
+        this.update_story();
+        this.update_collect()
+      },
+
+      update_collect: function () {
+        Sender.post(cfg.api + '/api/love_collect/add?user_id=' + this.now_user.id + '&article_id=' + this.story.id + '&collect=' + Number(this.collect_show))
+          .then(function (data) {
+            console.log("data", data);
+          })
+      },
+
+      update_love: function () {
+        Sender.post(cfg.api + '/api/love_collect/add?user_id=' + this.now_user.id + '&article_id=' + this.story.id + '&love=' + Number(this.love_show))
+          .then(function (data) {
+            console.log("data", data);
+          })
+      },
+      read_love: function () {
+        let me = this;
+        Sender.post(cfg.api + '/api/love_collect/read_user_love?user_id=' + this.now_user.id + '&article_id=' + this.story.id)
+          .then(function (data) {
+            console.log("data", data);
+            if (data.data[0].love) {
+              me.love_show = true
+            } else {
+              me.love_show = false;
+            }
+            console.log("data.data[0].collect", data.data[0].collect);
+            if (data.data[0].collect) {
+              me.collect_show = true
+            } else {
+              me.collect_show = false;
+            }
+          })
       },
       update_story: function () {
-        Sender.post(cfg.api + '/api/story/add', this.story)
-          .then(function (data) {
-            // console.log("data", data);
-          })
-      },
-      btn_love: function () {
-        this.temporary.love = !this.temporary.love;
-        let me = this;
-        if (this.temporary.love) {
-          this.story.love++;
-          this.update_story();
-          console.log("已经点赞");
-          console.log(" this.story.love", this.story.love);
-        } else {
-          this.story.love--;
-          this.update_story();
-          console.log("撤销点赞");
-          console.log(" this.story.love", this.story.love);
-        }
-      },
-      btn_coll: function () {
-        this.temporary.collect = !this.temporary.collect;
-        let me = this;
-        if (this.temporary.collect) {
-          this.story.collect++;
-          this.update_story();
-        } else {
-          this.story.collect--;
-          this.update_story();
-        }
-        this.now_user.data.forEach(function (item, index) {
-          if (item.id == me.temporary.id) {
-            me.now_user.data[index].collect = me.temporary.collect;
-            // item = me.temporary;
-          }
+        Sender.post(cfg.api + '/api/story/add', this.story).then(function (data) {
+          console.log("data", data);
         })
-        console.log("this.now_user.data.collect", this.now_user.data[0].collect);
-        Sender.post(cfg.api + '/api/update_data', this.now_user)
-          .then(function (data) {
-            // data[0].data.forEach(function (item) {
-            //   if (item.id == me.temporary.id) {
-            //     me.now_user()
-            //   }
-            // })
-            me.test(data.data[0]);
-          })
-
-      },
-
+      }
     },
     updated: function () {
       $('.test').find('p').css('color', 'blue');
     },
     mounted: function () {
-      this.test(this.now_user)
     }
 
 
