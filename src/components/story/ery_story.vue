@@ -49,6 +49,19 @@
         </div>
       </el-col>
     </el-row>
+    <el-row>
+      <el-col :span="24">
+        评论
+      </el-col>
+      <el-col :span="24">
+        <el-input v-model="comment.comment">
+
+        </el-input>
+        <el-button @click="btn_comment">
+          发送
+        </el-button>
+      </el-col>
+    </el-row>
   </div>
 
 
@@ -69,6 +82,10 @@
         writer: {},
         love_show: '',
         collect_show: '',
+        comment: {
+          comment: '',
+        },
+
       }
     },
     props: ['id'],
@@ -85,7 +102,6 @@
           Sender.post(`${cfg.api}/api/read_user_id?id=${user_id}`)
             .then(function (data) {
               me.writer = data;
-
             })
         })
 
@@ -111,6 +127,8 @@
         el.classList.add('test')
         content.appendChild(el);
         this.read_love();
+        this.read_comment();
+
       },
       collect_btn: function () {
         this.collect_show = !this.collect_show;
@@ -118,7 +136,6 @@
         this.update_story();
         this.update_collect()
       },
-
       love_btn: function () {
         this.love_show = !this.love_show;
         this.story.love++;
@@ -137,14 +154,12 @@
         this.update_story();
         this.update_collect()
       },
-
       update_collect: function () {
         Sender.post(cfg.api + '/api/love_collect/add?user_id=' + this.now_user.id + '&article_id=' + this.story.id + '&collect=' + Number(this.collect_show))
           .then(function (data) {
             console.log("data", data);
           })
       },
-
       update_love: function () {
         Sender.post(cfg.api + '/api/love_collect/add?user_id=' + this.now_user.id + '&article_id=' + this.story.id + '&love=' + Number(this.love_show))
           .then(function (data) {
@@ -173,6 +188,20 @@
         Sender.post(cfg.api + '/api/story/add', this.story).then(function (data) {
           console.log("data", data);
         })
+      },
+      btn_comment: function () {
+        this.comment.user_id = this.now_user.id;
+        this.comment.article_id = this.story.id;
+        Sender.post(cfg.api + '/api/story_comments/add', this.comment)
+          .then(function (data) {
+            console.log("data", data);
+          })
+      },
+      read_comment: function () {
+        Sender.post(cfg.api + '/api/story_comments/read_comment?article_id=' + this.story.id)
+          .then(function (data) {
+            console.log("data123", data);
+          })
       }
     },
     updated: function () {
