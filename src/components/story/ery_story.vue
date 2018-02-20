@@ -62,6 +62,24 @@
         </el-button>
       </el-col>
     </el-row>
+
+    <el-row>
+      <el-col :span="24">
+        <div v-for="item in comments">
+          <div>
+            <span>
+            {{item.username}}
+            </span>
+            <span>
+              {{item.time}}天之前
+            </span>
+          </div>
+          <div>{{item.comment}}</div>
+        </div>
+      </el-col>
+    </el-row>
+
+
   </div>
 
 
@@ -85,7 +103,7 @@
         comment: {
           comment: '',
         },
-
+        comments: [],
       }
     },
     props: ['id'],
@@ -116,6 +134,7 @@
       now_user: function () {
         return this.$store.getters['get_user'];
       },
+
     },
     watch: {},
     methods: {
@@ -198,9 +217,10 @@
           })
       },
       read_comment: function () {
+        let me = this;
         Sender.post(cfg.api + '/api/story_comments/read_comment?article_id=' + this.story.id)
           .then(function (data) {
-            console.log("data123", data);
+            me.comments = data;
           })
       }
     },

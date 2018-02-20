@@ -23,7 +23,7 @@
               </template>
               <el-menu-item-group>
                 <router-link to="/admin/home/house_audit">
-                <el-menu-item index="1-1">房源审核</el-menu-item>
+                  <el-menu-item index="1-1">房源审核</el-menu-item>
                 </router-link>
                 <el-menu-item index="1-2">预定信息</el-menu-item>
               </el-menu-item-group>
