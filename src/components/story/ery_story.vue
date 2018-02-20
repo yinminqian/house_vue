@@ -67,19 +67,33 @@
       <el-col :span="24">
         <div v-for="item in comments">
           <div>
+            <div v-if="item.parent">
+              {{item.parent}}回复
+            </div>
             <span>
             {{item.username}}
             </span>
+
+
             <span>
               {{item.time}}天之前
             </span>
           </div>
           <div>{{item.comment}}</div>
+
+          <button>赞</button>
+          <button>踩</button>
+          <button v-if="item.reply" @click="item.reply = !item.reply">回复</button>
+          <el-input v-if="! item.reply" v-model="level2_comment.comment">
+
+          </el-input>
+          <button v-if="! item.reply" @click="item.reply = !item.reply">取消</button>
+          <button v-if="! item.reply" @click="item.reply = !item.reply;level2_comment_btn(item.id)">
+            发送
+          </button>
         </div>
       </el-col>
     </el-row>
-
-
   </div>
 
 
@@ -101,6 +115,9 @@
         love_show: '',
         collect_show: '',
         comment: {
+          comment: '',
+        },
+        level2_comment: {
           comment: '',
         },
         comments: [],
@@ -220,14 +237,30 @@
         let me = this;
         Sender.post(cfg.api + '/api/story_comments/read_comment?article_id=' + this.story.id)
           .then(function (data) {
+            console.log("data", data);
             me.comments = data;
           })
+      },
+
+
+      level2_comment_btn: function (item) {
+        let me =this;
+        this.level2_comment.user_id = this.now_user.id;
+        this.level2_comment.article_id = this.story.id;
+        this.level2_comment.parent_id = item;
+        Sender.post(cfg.api + '/api/story_comments/add', this.level2_comment)
+          .then(function (data) {
+            me.read_comment()
+          })
+
+
       }
     },
     updated: function () {
       $('.test').find('p').css('color', 'blue');
     },
     mounted: function () {
+
     }
 
 
@@ -240,5 +273,9 @@
 
   html body div#app div div.el-row div.el-col.el-col-24 div.content div.test p {
     color: red;
+  }
+
+  .son {
+    background-color: aqua;
   }
 </style>
