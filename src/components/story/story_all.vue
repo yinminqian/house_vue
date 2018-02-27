@@ -1,6 +1,12 @@
 <template>
   <div>
     <h1>全部故事</h1>
+    <router-link to="/write_story">
+      <el-button>
+        写故事
+      </el-button>
+    </router-link>
+
     <div v-for="item in all_story">
       <el-row>
         <el-col :span="6">

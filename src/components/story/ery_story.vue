@@ -81,8 +81,7 @@
           </div>
           <div>{{item.comment}}</div>
 
-          <button>赞</button>
-          <button>踩</button>
+
           <button v-if="item.reply" @click="item.reply = !item.reply">回复</button>
           <el-input v-if="! item.reply" v-model="level2_comment.comment">
 

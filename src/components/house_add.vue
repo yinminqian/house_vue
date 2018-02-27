@@ -2,59 +2,77 @@
   <div class="test">
     <nav_title></nav_title>
     <hr style="color: #666;">
-    <el-row>
-      <el-col :span="12" style="text-align: center">
-        <h1>发布房源</h1>
-        <h5>步骤1</h5>
-        <h3>您打算发布什么样的房源</h3>
+    <div class="container">
+      <div class="row ino">
+
+
+      <div class="col-md-6">
+        <h4>您好，开始发布您的房源吧！</h4>
+        <span>步骤1</span>
+        <h5>您打算发布什么样的房源</h5>
         <div>
-          <el-row>
-            <el-col :span="12">
-              <el-select v-model="value" placeholder="请选择">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-col>
-            <el-col :span="12">
-              <el-select v-model="value" placeholder="请选择">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-col>
-            <el-col :span="24">
-              <el-autocomplete
-                v-model="state4"
-                :fetch-suggestions="querySearchAsync"
-                placeholder="请输入内容"
-                @select="handleSelect"
-              ></el-autocomplete>
-            </el-col>
-          </el-row>
+      <div class="row">
+        <div class="col-md-6">
+          <el-select v-model="value" class="inp_" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+
+        </div>
+        <div class="col-md-6">
+          <el-select v-model="values" class="inp_" placeholder="请选择">
+            <el-option
+              v-for="item in optionss"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+        <div class="col-md-12">
+          <el-autocomplete
+            v-model="state4"
+            :fetch-suggestions="querySearchAsync"
+            placeholder="请输入内容"
+            @select="handleSelect"
+            class="loca_inp"
+          ></el-autocomplete>
+
+        </div>
+      <div class="col-md-12">
+        <router-link to="/basics1">
+          <el-button class="btn_next">下一步</el-button>
+        </router-link>
+
+      </div>
+      </div>
 
 
-          <router-link to="/basics1">
-            <el-button>下一步</el-button>
-          </router-link>
+
+
+
+
+
+
+
           <el-alert
             title="$$"
             type="success"
-            description="我们估计你一个月能赚$3000">
+            description="我们估计你一个月能赚$3000"
+          class="alert_"
+          >
           </el-alert>
         </div>
 
 
-      </el-col>
-      <el-col :span="12">
-        <div style="width: 100%;height: 100%;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 1024" width="576" height="500"
+      </div>
+      <div class="col-md-6">
+        <div style="width: 100%;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 1024" width="300" height="300"
                preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%;">
             <defs>
               <clipPath id="animationMask_Pd4lBOmlKk">
@@ -159,12 +177,12 @@
               </g>
             </g>
           </svg>
-
         </div>
 
 
-      </el-col>
-    </el-row>
+      </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -177,14 +195,39 @@
     data() {
       return {
         msg: 'jsidiajdiaj',
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }],
+        options: [
+          {
+          value: '2',
+          label: '民房'
+        },
+          {
+            value: '1',
+            label: '酒店'
+          },
+          {
+            value: '3',
+            label: '其他'
+          },
+        ],
+        optionss: [
+          {
+            value: '4',
+            label: '只有卧室'
+          },
+          {
+            value: '5',
+            label: '整套房源'
+          },
+          {
+            value: '7',
+            label: '其他'
+          },
+        ],
         value: '',
         state4: '',
         timeout: null,
-        hint_: 'niaho'
+        hint_: 'niaho',
+        values:'',
       }
     },
     components: {
@@ -229,7 +272,7 @@
 </script>
 
 
-<style scoped>
+<style lang="scss" scoped>
   .test >>> .header-btn, .test >>> .header {
     color: black;
   }
@@ -237,6 +280,27 @@
   [svg] {
     transform-origin: 50% 50% 0px;
   }
+.loca_inp{
+  margin: 5px;
+  width: 100%;
+}
+  .inp_{
+    width: 100%;
+    margin: 5px;
+  }
+  .ino{
+    padding: 10px 20px;
+  }
+.btn_next{
+  margin: 5px;
+}
+  h4{
+    margin-bottom: 20px;
+  }
+  .alert_{
+    margin: 40px 0 40px 0;
+    width: 300px;
+    height: 100px;
 
-
+  }
 </style>

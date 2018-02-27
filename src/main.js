@@ -8,6 +8,8 @@ import Vuex from 'Vuex'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Sender from './Sender/sender'
+import '../node_modules/bootstrap/dist/css/bootstrap.css'
+import 'font-awesome/css/font-awesome.css'
 
 //Vue的富文编辑器
 

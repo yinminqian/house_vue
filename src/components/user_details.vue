@@ -9,7 +9,10 @@
           <div class="user_bar">对我的评价</div>
           <div class="user_bar">我评论过的</div>
           <div class="user_bar">
+            <router-link to="/user_home_page">
+
             <el-button>查看我的主页</el-button>
+            </router-link>
           </div>
         </div>
       </el-col>

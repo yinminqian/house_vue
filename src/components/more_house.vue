@@ -12,7 +12,7 @@
               <el-col :span="7">
                 <div>
 
-                  <img :src="'http://'+item.photo[0]" alt="" style="width: 100%;height: 100%;">
+                  <img :src="item.photo[0]" alt="" style="width: 100%;height: 100%;">
                   <h5>{{item.house_title}}</h5>
 
                 </div>
