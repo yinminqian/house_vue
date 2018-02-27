@@ -39,7 +39,17 @@
     }
     .el-progress-bar__inner{
       border-radius: 0;
-
     }
+  },
+  .bas_2{
+    .el-progress-bar__outer{
+      border-radius: 0;
+    }
+    .el-progress-bar__inner{
+      border-radius: 0;
+    }
+
+
+
   }
 </style>
