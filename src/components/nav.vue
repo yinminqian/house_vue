@@ -108,7 +108,7 @@
 </template>
 <script>
   import Sender from '../Sender/sender'
-
+import cfg from '../../.cfg'
   export default {
     name: 'nav_title',
     data() {
@@ -122,8 +122,8 @@
           password: '',
         },
         login_form: {
-          username: 'yin7',
-          password: 'ewrwe',
+          username: '',
+          password: '',
         },
         formLabelWidth: '0px',
         show_login: false,
@@ -162,7 +162,7 @@
       },
       submit() {
         let me = this;
-        Sender.post('http://localhost:2333/api/signup', this.form)
+        Sender.post(cfg.api+'/api/signup', this.form)
           .then(function (data) {
             console.log("data",data);
             if (data) {
@@ -174,7 +174,7 @@
       },
       login_btn: function (data) {
         let me = this;
-        Sender.post('http://localhost:2333/api/login', data)
+        Sender.post(cfg.api+'/api/login', data)
           .then(function (data) {
             console.log("data_login", data);
             if (data)
@@ -191,7 +191,7 @@
       },
       is_login: function () {
         let me = this;
-        Sender.post('http://localhost:2333/api/islogin')
+        Sender.post(cfg.api+'/api/islogin')
           .then(function (data) {
             if (data.success) {
               me.user = data.data;
@@ -203,7 +203,7 @@
       },
       logout: function () {
         let me = this;
-        Sender.post('http://localhost:2333/api/logout')
+        Sender.post(cfg.api+'/api/logout')
           .then(function (data) {
             if (data.success) {
               me.is_login();

@@ -186,7 +186,7 @@ const store = new vuex.Store({
         });
     },
     is_login: function (context) {
-      Sender.post('http://localhost:2333/api/islogin')
+      Sender.post(cfg.api + '/api/islogin')
         .then(function (data) {
           context.commit('get_user', data.data)
         })
