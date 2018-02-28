@@ -108,7 +108,8 @@
 </template>
 <script>
   import Sender from '../Sender/sender'
-import cfg from '../../.cfg'
+  import cfg from '../../.cfg'
+
   export default {
     name: 'nav_title',
     data() {
@@ -162,9 +163,9 @@ import cfg from '../../.cfg'
       },
       submit() {
         let me = this;
-        Sender.post(cfg.api+'/api/signup', this.form)
+        Sender.post(cfg.api + '/api/signup', this.form)
           .then(function (data) {
-            console.log("data",data);
+            console.log("data", data);
             if (data) {
               me.login_btn({username: me.form['username'], password: me.form['password']})
               me.win();
@@ -173,11 +174,13 @@ import cfg from '../../.cfg'
           })
       },
       login_btn: function (data) {
+        console.log("data", data);
         let me = this;
-        Sender.post(cfg.api+'/api/login', data)
+        Sender.post(cfg.api + '/api/login', data)
           .then(function (item) {
             console.log("data_login", item);
-            if (item){
+            if (item == 1) {
+              console.log("进入结果判断函数");
               me.is_login();
               console.log("登陆成功");
             }
@@ -192,10 +195,11 @@ import cfg from '../../.cfg'
         });
       },
       is_login: function () {
+        console.log("运行了我is_login");
         let me = this;
-        Sender.post(cfg.api+'/api/islogin')
+        Sender.post(cfg.api + '/api/islogin')
           .then(function (data) {
-            console.log("data",data);
+            console.log("data", data);
             if (data.success) {
               me.user = data.data;
               me.show_login = data.success;
@@ -206,7 +210,7 @@ import cfg from '../../.cfg'
       },
       logout: function () {
         let me = this;
-        Sender.post(cfg.api+'/api/logout')
+        Sender.post(cfg.api + '/api/logout')
           .then(function (data) {
             if (data.success) {
               me.is_login();
