@@ -193,6 +193,7 @@ import cfg from '../../.cfg'
         let me = this;
         Sender.post(cfg.api+'/api/islogin')
           .then(function (data) {
+            console.log("data",data);
             if (data.success) {
               me.user = data.data;
               me.show_login = data.success;
