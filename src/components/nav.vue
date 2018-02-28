@@ -178,7 +178,7 @@
         let me = this;
         Sender.post(cfg.api + '/api/login', data)
           .then(function (item) {
-            console.log("data_login", item);
+            console.log("登陆返回值", item);
             if (item == 1) {
               console.log("进入true判断");
               me.is_login();
