@@ -175,12 +175,14 @@ import cfg from '../../.cfg'
       login_btn: function (data) {
         let me = this;
         Sender.post(cfg.api+'/api/login', data)
-          .then(function (data) {
-            console.log("data_login", data);
-            if (data)
+          .then(function (item) {
+            console.log("data_login", item);
+            if (item){
               me.is_login();
-          }, function (data) {
-            console.log("data1", data);
+              console.log("登陆成功");
+            }
+          }, function (item) {
+            console.log("data1", item);
           })
       },
       win() {
