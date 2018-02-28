@@ -180,9 +180,11 @@
           .then(function (item) {
             console.log("data_login", item);
             if (item == 1) {
-              console.log("进入结果判断函数");
+              console.log("进入true判断");
               me.is_login();
               console.log("登陆成功");
+            }else {
+              console.log("进入else错误");
             }
           }, function (item) {
             console.log("data1", item);
