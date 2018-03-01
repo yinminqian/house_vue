@@ -197,7 +197,6 @@
               me.is_login();
               console.log("登陆成功");
               me.dialogloginVisible = false;
-              me.show=true;
             }else {
               console.log("进入else错误");
             }
@@ -226,6 +225,7 @@
         Sender.post(cfg.api + '/api/islogin')
           .then(function (data) {
             if (data.success) {
+              console.log("data12121",data);
               me.user = data.data;
               me.show_login = data.success;
             }else {
