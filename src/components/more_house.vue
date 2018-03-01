@@ -64,6 +64,9 @@
 
       </div>
     </div>
+    <food>
+
+    </food>
   </div>
 </template>
 
@@ -72,6 +75,7 @@
   import nav_title from './nav'
   import Sender from '../Sender/sender'
   import cfg from '../../.cfg'
+  import food from './food'
 
   export default ({
     name: 'house_more',
@@ -82,6 +86,7 @@
     },
     components: {
       nav_title: nav_title,
+      food:food,
     },
     created: function () {
       let me = this;
@@ -113,5 +118,8 @@
   }
   .house_title {
     display: inline-block;
+  }
+  a{
+    text-decoration: none;
   }
 </style>

@@ -179,7 +179,7 @@
       </div>
     </div>
 
-
+<food></food>
   </div>
 </template>
 
@@ -188,6 +188,8 @@
   import nav_title from '@/components/nav'
   import Sender from '../Sender/sender'
   import cfg from '../../.cfg'
+  import food from './food'
+
 
   export default ({
     name: 'user_details',
@@ -211,7 +213,8 @@
       }
     },
     components: {
-      nav_title: nav_title
+      nav_title: nav_title,
+      food:food,
     },
     computed: {
       get_user: function () {

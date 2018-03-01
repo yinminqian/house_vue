@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import food from '@/components/food'
 import house_add from '@/components/house_add'
 import more_house from '@/components/more_house'
 import house_material from '@/components/house_details'
@@ -29,6 +30,10 @@ export default new Router({
       component: write_story
     }
     ,
+    {
+      path: '/food',
+      component: food
+    },
     {
       path: '/ery_story/:id',
       props: true,

@@ -174,10 +174,9 @@
               <span class="vice_span">具体位置:{{house_data.location['state']}} {{house_data.location['city']}} {{house_data.location['street']}} {{house_data.location['plot']}}</span>
             </div>
             <div class="col-md-12">
-              <amap location='house_data.location'></amap>
+              <amap location='new_house.location'></amap>
               <br>
 
-              <hr>
             </div>
 
 
@@ -214,7 +213,9 @@
 
       </div>
     </div>
+<food>
 
+</food>
 
   </div>
 </template>
@@ -225,6 +226,7 @@
   import cfg from '../../.cfg'
   import nav_title from './nav'
   import amap from './amap'
+  import food from './food'
 
 
   export default ({
@@ -243,6 +245,7 @@
         offsetTop: 650,
         searchBarFixed: false,
         house_data: {},
+        new_house:{},
         img_1: '',
         img_2: '',
         lady: {},
@@ -283,6 +286,7 @@
     components: {
       nav_title: nav_title,
       amap: amap,
+      food:food,
     },
 
     created: function () {
@@ -291,8 +295,8 @@
       Sender.post(`${cfg.api}/api/house/read_id?id=${this.id}`)
         .then(function (data) {
           me.house_data = data[0];
-          me.img_1 = data[0].photo[0];
-          me.img_2 = data[0].photo[1];
+          me.new_house = data[0];
+
           me.house_location = data[0].location
           Sender.post(`${cfg.api}/api/read_user_id?id=${me.house_data.user_id}`)
             .then(function (data) {

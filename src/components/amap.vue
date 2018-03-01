@@ -87,8 +87,8 @@
     },
     computed: {
       location() {
-        let new_house = this.$store.getters['get_new_house']
-        return new_house.location;
+        // let new_house = this.$store.getters['get_new_house']
+        return this.location;
       }
     }
   };

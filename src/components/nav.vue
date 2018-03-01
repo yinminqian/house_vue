@@ -76,11 +76,11 @@
         </el-form-item>
 
         <el-form-item label="" :label-width="formLabelWidth">
-          <el-input v-model="form.password" auto-complete="off" placeholder="密码"></el-input>
+          <el-input v-model="form.password" auto-complete="off" type="password" placeholder="密码"></el-input>
         </el-form-item>
 
         <el-form-item label="" :label-width="formLabelWidth">
-          <el-input v-model="form.is_password" auto-complete="off" placeholder="确认密码"></el-input>
+          <el-input type="password" v-model="form.is_password" auto-complete="off" placeholder="确认密码"></el-input>
         </el-form-item>
 
       </el-form>
@@ -100,7 +100,7 @@
           <el-input v-model="login_form.username" auto-complete="off" placeholder="用户名"></el-input>
         </el-form-item>
         <el-form-item label="" :label-width="formLabelWidth">
-          <el-input v-model="login_form.password" auto-complete="off" placeholder="密码"></el-input>
+          <el-input v-model="login_form.password" auto-complete="off" type="password" placeholder="密码"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -123,6 +123,7 @@
     name: 'nav_title',
     data() {
       return {
+        show:false,
         dialogsignupVisible: false,
         dialogloginVisible: false,
         form: {
@@ -132,8 +133,8 @@
           password: '',
         },
         login_form: {
-          username: '',
-          password: '',
+          username: 'yinminqian',
+          password: 'minqian',
         },
         formLabelWidth: '0px',
         show_login: false,
@@ -174,11 +175,14 @@
         let me = this;
         Sender.post(cfg.api + '/api/signup', this.form)
           .then(function (data) {
-            console.log("data", data);
             if (data) {
               me.login_btn({username: me.form['username'], password: me.form['password']})
               me.win();
               me.is_login();
+              me.dialogsignupVisible = false
+            }
+            else{
+              me.open6();
             }
           })
       },
@@ -192,6 +196,8 @@
               console.log("进入true判断");
               me.is_login();
               console.log("登陆成功");
+              me.dialogloginVisible = false;
+              me.show=true;
             }else {
               console.log("进入else错误");
             }
@@ -205,15 +211,25 @@
           type: 'success'
         });
       },
+      open6() {
+        this.$notify.error({
+          title: '错误',
+          message: '可能是手机号和用户名已经存在,请尝试修改,或者直接点击登陆,输入框有现成的账号密码'
+        });
+      },
+
+
+
       is_login: function () {
         console.log("运行了我is_login");
         let me = this;
         Sender.post(cfg.api + '/api/islogin')
           .then(function (data) {
-            console.log("data", data);
             if (data.success) {
               me.user = data.data;
               me.show_login = data.success;
+            }else {
+              me.dialogloginVisible=true;
             }
             me.show_login = data.success;
             return;
@@ -232,6 +248,9 @@
     },
     created: function () {
       return this.is_login()
+    },
+    mounted:function () {
+      this.is_login();
     }
   }
 </script>
@@ -245,6 +264,9 @@
     color: black;
     padding: 15px;
     /*margin-left: 20px;*/
+  }
+  a{
+    text-decoration: none;
   }
 
 

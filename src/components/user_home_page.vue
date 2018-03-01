@@ -41,6 +41,7 @@
             <h5 class="text_title">生活照</h5>
             <div class="row">
               <div class="col-md-3" v-for="item in user_msg.life_photo">
+
                 <img :src="item+'?imageView2/1/w/400/h/400'" alt="" class="life_photo">
               </div>
             </div>
@@ -50,9 +51,13 @@
           <div class="col-md-12">
             <h5 class="text_title">故事</h5>
             <div class="row">
+
               <div class="col-md-3 story" v-for="item in story">
-                <img :src="item['cover_photo']+'?imageView2/1/w/400/h/400'" alt="" class="life_photo">
-                {{item.title}}
+                <router-link to="/ery_story/'+item.id">
+                  <img :src="item['cover_photo']+'?imageView2/1/w/400/h/400'" alt="" class="life_photo">
+                  {{item.title}}
+                </router-link>
+
               </div>
 
             </div>
@@ -61,8 +66,10 @@
             <h5 class="text_title">房源</h5>
             <div class="row">
               <div class="col-md-3 story" v-for="item in house">
+                <router-link :to="'/house_material/'+item.id">
                 <img :src="item['photo'][0]+'?imageView2/1/w/400/h/400'" alt="" class="life_photo">
                 {{item.house_title}}
+                </router-link>
               </div>
             </div>
           </div>
@@ -71,7 +78,7 @@
         </div>
       </div>
     </div>
-
+<food></food>
 
   </div>
 </template>
@@ -80,6 +87,7 @@
 <script>
 
   import nav_title from './nav'
+  import food from './food'
   import Sender from '../Sender/sender'
   import cfg from '../../.cfg'
 
@@ -95,6 +103,7 @@
     },
     components: {
       nav_title: nav_title,
+      food:food,
     },
     created: function () {
       this.$store.dispatch('is_login');
@@ -173,5 +182,8 @@
   .gu {
     position: fixed;
     top: 0px;
+  }
+  a{
+    text-decoration: none;
   }
 </style>

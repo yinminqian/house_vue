@@ -232,6 +232,7 @@
    </div>
       </div>
     </div>
+    <food></food>
   </div>
 
 
@@ -242,6 +243,7 @@
   import nav_title from '@/components/nav'
   import Sender from '../Sender/sender'
   import cfg from '../../.cfg'
+  import food from './food'
 
   export default ({
     name: 'helloword',
@@ -255,7 +257,8 @@
       }
     },
     components: {
-      nav_title: nav_title
+      nav_title: nav_title,
+      food:food
     },
     computed: {
       user() {
@@ -475,5 +478,8 @@
   }
   .hint{
     margin-top: 30px;
+  }
+  a{
+    text-decoration: none;
   }
 </style>

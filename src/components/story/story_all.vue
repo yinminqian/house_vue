@@ -81,7 +81,8 @@
       </div>
     </div>
 
-
+<food>
+</food>
   </div>
 </template>
 
@@ -90,6 +91,7 @@
   import Sender from '../../Sender/sender'
   import cfg from '../../../.cfg'
   import nav_ from '../nav'
+  import food from '../food'
 
   export default ({
     name: 'story_all',
@@ -100,6 +102,7 @@
     },
     components: {
       nav_: nav_,
+      food:food
     },
     created: function () {
       let me = this;
@@ -170,5 +173,8 @@
   .wi {
     text-align: right;
     padding-right: 20px;
+  }
+  a{
+    text-decoration: none;
   }
 </style>
