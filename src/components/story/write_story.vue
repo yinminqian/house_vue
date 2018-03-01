@@ -137,7 +137,13 @@
       nav_: nav_
     },
     methods: {
-
+      open3() {
+        this.$notify({
+          title: '成功',
+          message: '发表成功',
+          type: 'success'
+        });
+      },
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
@@ -170,10 +176,14 @@
           })
       },
       sub_publish: function () {
+        let me =this;
         this.show_ = 1;
         Sender.post(cfg.api + '/api/story/add', this.story)
           .then(function (data) {
-            console.log("data", data);
+            if (data.success){
+              me.open3();
+              me.$router.push({path:'story_all'})
+            }
           })
       }
     },

@@ -36,6 +36,7 @@ export default new Router({
     },
     {
       path: '/story_all',
+      name:'story_all',
       component: story_all,
     }
     ,

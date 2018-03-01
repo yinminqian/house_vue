@@ -63,7 +63,8 @@
             <div class="col-md-3" v-for="item in all_story">
               <div class="size_sre">
                 <router-link :to="'/ery_story/'+item.id">
-                  <img :src="item.cover_photo+'?imageView2/1/w/300/h/300'" alt="" style="width: 100%;height: 242px;" class="img_sto">
+                  <img :src="item.cover_photo+'?imageView2/1/w/300/h/300'" alt="" style="width: 100%;height: 242px;"
+                       class="img_sto">
                   {{item.title}}
                   <br>
                   <span class="fa fa-bookmark"> {{item.collect}}</span>
@@ -165,7 +166,8 @@
     margin-bottom: 10px;
     margin-left: 5px;
   }
-  .wi{
+
+  .wi {
     text-align: right;
     padding-right: 20px;
   }

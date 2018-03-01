@@ -56,4 +56,10 @@
   .btn_back_one {
     text-align: left;
   }
+  .router-link-active {
+    text-decoration: none;
+  }
+  a {
+    text-decoraction: none !important;
+  }
 </style>

@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <div class="gu">
+          <div v-bind:class="{gu:searchBarFixed}">
             <div class="col-md-12 img_photo">
               <img :src="user_msg.photo+'?imageView2/1/w/200/h/200'" alt="" class="img_">
             </div>
@@ -29,7 +29,14 @@
           <div class="col-md-12 text_msg">
             <h4>您好,我是 {{user_msg.username}}</h4>
           </div>
-
+          <div class="co-md-12 text_msg">
+            <h4>
+              个人简介
+            </h4>
+            <span>
+              {{user_msg.referral}}
+            </span>
+          </div>
           <div class="col-md-12">
             <h5 class="text_title">生活照</h5>
             <div class="row">
@@ -82,6 +89,8 @@
       return {
         house: [],
         story: [],
+        offsetTop:121,
+        searchBarFixed:false,
       }
     },
     components: {
@@ -93,12 +102,20 @@
     computed: {
       user_msg: function () {
         return this.$store.getters['get_user'];
-      }
+      },
     },
     methods: {
       test: function () {
         console.log("this", this.user_msg);
-      }
+      },
+      handleScroll () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        if (scrollTop > this.offsetTop) {
+          this.searchBarFixed = true
+        } else {
+          this.searchBarFixed = false
+        }
+      },
     },
     watch: {
       user_msg: function () {
@@ -112,14 +129,15 @@
           .then(function (data) {
             me.story = data;
           })
-
-
       },
 
     },
     mounted: function () {
-
-    }
+      window.addEventListener('scroll', this.handleScroll);
+    },
+    destroyed () {
+      window.removeEventListener('scroll', this.handleScroll)
+    },
 
   })
 </script>
@@ -128,7 +146,7 @@
 <style lang="scss" scoped>
   .img_photo {
     padding: 10px;
-    text-align: center;
+    /*text-align: center;*/
   }
 
   .img_ {
@@ -154,6 +172,6 @@
 
   .gu {
     position: fixed;
-    top: 150px;
+    top: 0px;
   }
 </style>

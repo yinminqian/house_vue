@@ -78,8 +78,6 @@
     components: {
       nav_title: nav_title,
     }
-
-
   })
 
 </script>

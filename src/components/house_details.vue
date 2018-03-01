@@ -10,7 +10,7 @@
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
             <swiper-slide v-for="item in house_data.photo">
-              <img :src="item +'?imageView2/1/w/500/h/500'" alt="">
+              <img :src="item +'?imageView2/1/w/1000/h/500'" alt="" class="img_">
             </swiper-slide>
             <!-- Optional controls -->
             <!--<div class="swiper-pagination"  slot="pagination"></div>-->
@@ -41,82 +41,101 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-
+          <div class="col-md-12 nav_text card_">
+            详情
+          </div>
           <div class="col-md-12">
+           <span class="sm_span">
             {{house_data.location['city']}}-{{house_data.genre}}
+           </span>
           </div>
 
 
           <div class="col-md-12">
-            <h4>{{house_data.house_title}}</h4>
-            <span>卧室:{{house_data.room_number?house_data.room_number:0}}个</span>
-            <span>床:{{house_data.bed_number?house_data.bed_number:0}}个</span>
-            <span>{{house_data.toilet?house_data.toilet:0}}个卫生间</span>
-            <span>最多住:{{house_data.people_number?house_data.people_number:0}}个人</span>
+            <h3>{{house_data.house_title}}</h3>
+            <span class="vice_span">卧室:{{house_data.room_number?house_data.room_number:0}}个</span>
+            <span class="vice_span">床:{{house_data.bed_number?house_data.bed_number:0}}个</span>
+            <span class="vice_span">{{house_data.toilet?house_data.toilet:0}}个卫生间</span>
+            <span class="vice_span">最多住:{{house_data.people_number?house_data.people_number:0}}个人</span>
           </div>
 
 
           <hr style="color: #000;">
 
 
-          <div class="col-md-12">
+          <div class="col-md-12 card_ user">
             <div class="row">
               <div class="col-md-2">
                 <img :src="lady.photo+'?imageView2/1/w/80/h/80'" alt="" class="user_img">
               </div>
               <div class="col-md-10 username">
                 <h5>房东:{{lady.username}}</h5>
+                <router-link to="/user_home_page">
                 <span>
                   查看主页
                 </span>
+                </router-link>
               </div>
 
             </div>
 
           </div>
-          <div class="col-md-12">
-            <h5>房屋描述</h5>
-            <span>{{house_data.house_text}}</span>
+          <div class="col-md-12 card_">
+            <h5 class="title_h5">房屋描述</h5>
+            <span class="des">{{house_data.house_text}}</span>
           </div>
 
 
-          <div class="col-md-12">
-            <h5>设施信息</h5>
-            <div v-for="item in house_data.facility">
-              <div v-if="item.have !=='false'">{{item.title}}</div>
+          <div class="col-md-12 card_">
+            <h5 class="title_h5">设施信息</h5>
+            <div class="row">
+              <div v-for="item in house_data.facility">
+                <div class="fac" v-if="item.have !=='false'">{{item.title}}</div>
+              </div>
             </div>
+
           </div>
           <div>
 
 
-            <div class="col-md-12">
-              <h5>可定状态</h5>
-              <span>最少住{{house_data.stay_min}}晚</span>
-              <h5>提前通知</h5>
-              <span>提前{{house_data.inform}}天通知</span>
+            <div class="col-md-12 card_">
+              <h5 class="title_h5">可定状态</h5>
+              <span class="vice_span">最少住{{house_data.stay_min}}晚</span>
+              <span class="vice_span">提前{{house_data.inform}}天通知</span>
             </div>
 
 
-            <div class="col-md-12">
-              房源类型
+            <div class="col-md-12 card_">
+              <h5 class="title_h5">
+                房源类型
+              </h5>
+
+              <span class="vice_span">
               {{house_data.genre}}/{{house_data.house_genre}}/{{house_data.bedroom_genre}}
+
+              </span>
             </div>
 
-            <div class="col-md-12">
-              <h5>便利设施</h5>
-              <div v-for="item in house_data.convenience">
-                <div v-if="item.have !=='false'">
-                  <span>
-                    {{item.title}}
-                  </span>
+            <div class="col-md-12 card_">
+              <h5 class="title_h5">便利设施</h5>
+              <div class="row">
+                <div v-for="item in house_data.convenience">
+                  <div v-if="item.have !=='false'">
+                    <div class="fac">
+                      {{item.title}}
+                    </div>
+                  </div>
                 </div>
+
               </div>
             </div>
-            <div class="col-md-12">
-              <h5>好处</h5>
+            <div class="col-md-12 card_">
+              <h5 class="title_h5">好处</h5>
               <div v-for="item in house_data.regulation">
-                <span v-if="item.mode">
+                <span class="vice_span" v-if="item.mode">
+                  <span>
                   {{item.label}}
+                  </span>
                 </span>
 
 
@@ -126,49 +145,53 @@
             </div>
 
 
-            <div class="col-md-12">
-              <h5>评价</h5>
-              <span>
-              开发中
-            </span>
+            <div class="col-md-12 card_">
+              <h5 class="title_h5">评价</h5>
+              <div class="compoent">
+                <i class="fa fa-comments-alt com_text">
+                  暂无评价
+                </i>
+
+              </div>
             </div>
 
 
-            <div class="col-md-12">
-              <h5>位置</h5>
-              <span>具体位置:{{house_data.location['state']}} {{house_data.location['city']}} {{house_data.location['street']}} {{house_data.location['plot']}}</span>
-            </div>
-
-
-            <div class="col-md-12">
-              <amap location='house_data.location'></amap>
-            </div>
-
-
-            <div class="col-md-12">
-              <h5>须知</h5>
+            <div class="col-md-12 card_">
+              <h5 class="title_h5">须知</h5>
 
               <div v-for="item in house_data.string">
-                <span v-if="! item.mode">
+                <span class="vice_span" v-if="! item.mode">
                   {{item.label}}
                 </span>
+                <span class="vice_span">
                 {{item.guest_title}}
                 {{item.landlord_title}}
+                </span>
               </div>
             </div>
-
-
             <div class="col-md-12">
-              <h5>房东</h5>
-              {{lady}}
+              <h5 class="title_h5">位置</h5>
+              <span class="vice_span">具体位置:{{house_data.location['state']}} {{house_data.location['city']}} {{house_data.location['street']}} {{house_data.location['plot']}}</span>
             </div>
+            <div class="col-md-12">
+              <amap location='house_data.location'></amap>
+              <br>
+
+              <hr>
+            </div>
+
 
           </div>
 
         </div>
         <div class="col-md-6">
-          <h5>预定面板</h5>
-          <div class="block">
+
+
+          <div class="block" v-bind:class="{gu:searchBarFixed}">
+            <h5 class="title_h5">预定面板</h5>
+            <span class="money">
+             ¥ {{house_data.fixation}}/晚
+            </span>
             <span class="demonstration">选择入住时间</span>
             <br>
             <el-date-picker
@@ -180,9 +203,11 @@
               :picker-options="pickerOptions1"
             >
             </el-date-picker>
+            <div class="show_title">
+              您暂时不会被收费
+            </div>
 
-
-            <el-button @click="sub_state">提交我的预定</el-button>
+            <el-button type="primary" @click="sub_state" class="btn_go">提交我的预定</el-button>
           </div>
         </div>
 
@@ -215,6 +240,8 @@
           },
 
         },
+        offsetTop: 650,
+        searchBarFixed: false,
         house_data: {},
         img_1: '',
         img_2: '',
@@ -284,6 +311,13 @@
         })
     },
     methods: {
+      open3() {
+        this.$notify({
+          title: '成功',
+          message: '您的预定已经成功',
+          type: 'success'
+        });
+      },
       sub_state: function () {
         let short_obj = {};
         let short_arr = [];
@@ -309,18 +343,30 @@
                 .then(function (data) {
                   me.time_reserve = data[0].time_reserve;
                   me.value6 = '';
-                })
+                  if (data.length > 0){
+                    me.open3()
+                  }
+                    })
             }
           });
-
-
-      }
+      },
+      handleScroll() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        if (scrollTop > this.offsetTop) {
+          this.searchBarFixed = true
+        } else {
+          this.searchBarFixed = false
+        }
+      },
     },
+
     mounted: function () {
+      window.addEventListener('scroll', this.handleScroll);
+    },
+    destroyed() {
+      window.removeEventListener('scroll', this.handleScroll)
+    },
 
-
-      new Date().toLocaleDateString();
-    }
   })
 
 
@@ -355,4 +401,102 @@
     padding-top: 15px;
   }
 
+  .nav_text {
+    margin-top: 10px;
+  }
+
+  .card_ {
+    border-bottom: 1px solid #dbdbdb;
+    padding-bottom: 10px;
+  }
+
+  .sm_span {
+    font-size: 13px;
+    color: #999;
+  }
+
+  .vice_span {
+    font-size: 14px;
+    color: #999;
+  }
+
+  .user {
+    padding-bottom: 10px;
+  }
+
+  .title_h5 {
+    margin: 15px 10px 15px 0px;
+  }
+
+  .des {
+    background-color: #f8f8f8;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .fac {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+  }
+
+  .compoent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+
+  .com_text {
+    font-size: 18px;
+    color: #999999;
+    font-weight: 500;
+  }
+
+  .money {
+    color: #999999;
+    font-size: 20px;
+    font-weight: 800;
+    display: block;
+  }
+
+  .show_title {
+    font-weight: 500;
+    padding: 20px;
+    padding-left: 0;
+  }
+
+  .btn_go {
+    margin: 20px;
+    margin-left: 0;
+  }
+
+  .block {
+    display: inline-block;
+    border: 1px solid #dbdbdb;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 10px;
+    margin-top: 40px;
+    border-radius: 5px;
+  }
+
+  .demonstration {
+    display: inline-block;
+    margin: 8px 0;
+  }
+
+  .img_ {
+  }
+
+  .gu {
+    position: fixed;
+    top: 0px;
+  }
 </style>

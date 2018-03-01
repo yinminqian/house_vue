@@ -82,10 +82,6 @@
         <div class="col-md-12">
           <div class="city_show">
             <span>北京</span>
-            <span>上海</span>
-            <span>杭州</span>
-            <span>苏州</span>
-            <span>桂林</span>
           </div>
 
         </div>
@@ -97,11 +93,11 @@
               <img :src="item.photo[0]+'?imageView2/1/w/200/h/200'" alt="" class="img_show_">
               <!--</div>-->
               <div class="show_title">
-                <h5 class="house_title">¥{{item.fixation}}</h5>
+                <br>
+                <span class="house_title">¥{{item.fixation}}</span>
                 <span>{{item.house_genre}}</span>
                 <span>可住{{item.people_number}}人</span>
-                <br>
-                <span>{{item.house_title}}</span>
+                <span class="text_title">{{item.house_title}}</span>
               </div>
             </router-link>
           </div>
@@ -159,14 +155,6 @@
         <div class="col-md-12">
           <h5>精选故事</h5>
         </div>
-        <!--<div class="col-md-4" v-for="item in all_story">-->
-          <!--<div class="size_house">-->
-            <!--<router-link :to="'/ery_story/'+item.id">-->
-              <!--<img :src="item.cover_photo" alt="" style="width: 100%;height: 100%;">-->
-            <!--</router-link>-->
-            <!--<h5>{{item.title}}</h5>-->
-          <!--</div>-->
-        <!--</div>-->
 
         <div class="col-md-3" v-for="item in all_story" style="height: 327px;">
           <div class="size_house">
@@ -190,7 +178,7 @@
 
 
 
-   <div class="col-md-12">
+   <div class="col-md-12 hint">
    <div class="row">
      <div class="col-md-4 balm">
        <div class="row">
@@ -449,7 +437,7 @@
   }
 
   .btn_all {
-    margin: 15px 0 15px 0;
+    margin: 25px 0 15px 0;
   }
 
   .size_sh {
@@ -481,5 +469,11 @@
   }
   .balm{
     margin: 20px 0 20px 0;
+  }
+  .text_title{
+    display:block;
+  }
+  .hint{
+    margin-top: 30px;
   }
 </style>
