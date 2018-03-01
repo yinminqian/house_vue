@@ -48,8 +48,12 @@
     .el-progress-bar__inner{
       border-radius: 0;
     }
+  }
+  .btn_one {
+    text-align: right;
+  }
 
-
-
+  .btn_back_one {
+    text-align: left;
   }
 </style>

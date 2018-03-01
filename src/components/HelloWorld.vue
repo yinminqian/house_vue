@@ -94,7 +94,7 @@
           <div class="size_house">
             <router-link :to="'/house_material/'+item.id">
               <!--<div class="img_show">-->
-              <img :src="item.photo[0]" alt="" class="img_show_">
+              <img :src="item.photo[0]+'?imageView2/1/w/200/h/200'" alt="" class="img_show_">
               <!--</div>-->
               <div class="show_title">
                 <h5 class="house_title">¥{{item.fixation}}</h5>
@@ -173,7 +173,7 @@
             <router-link :to="'/ery_story/'+item.id">
 
             <!--<div class="img_show">-->
-              <img :src="item.cover_photo" alt="" class="img_show_">
+              <img :src="item.cover_photo+'?imageView2/1/w/300/h/300'" alt="" class="img_show_">
               <!--</div>-->
               <div class="show_title">
                 <br>

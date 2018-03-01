@@ -1,6 +1,7 @@
 <template>
   <div>
-    <el-amap vid="amapDemo" style="width: 1080px;height: 300px;" :zoom="zoom" :events="events" :plugin="plugin"
+
+    <el-amap vid="amapDemo" style="height: 300px;" :zoom="zoom" :events="events" :plugin="plugin"
              :center="[longitude,latitude]" :amap-manager="maps">
       <div class="toolbar" v-if="!show_location">
         地理坐标: [{{ lng }}, {{ lat }}] {{ address }}

@@ -3,7 +3,7 @@
     <nav_title msg_title="2:再添加房源详情"></nav_title>
 
     <div class="container-fluid bas_2" style="margin: 0;padding:0;">
-      <el-progress :text-inside="true" :stroke-width="18" :percentage="20"></el-progress>
+      <el-progress :text-inside="true" :stroke-width="18" :percentage="plan__"></el-progress>
     </div>
 
     <div class="container">
@@ -11,95 +11,188 @@
         <div class="col-md-12 img_grup">
           <el-upload
             action="http://up-z2.qiniup.com"
-            list-type="picture-card"
+            list-type="picture"
             :on-preview="handlePictureCardPreview"
             :on-remove="handleRemove"
             :on-success="test"
             :data="token"
             :on-exceed="max_img"
           >
-            <i class="el-icon-plus"></i>
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
+
+
           <el-dialog :visible.sync="dialogVisible">
             <img width="100%" :src="dialogImageUrl" alt="">
           </el-dialog>
+
+
         </div>
 
         <div class="col-md-12 btn_grup">
-          <el-button @click="page_add">下一步</el-button>
+          <el-button @click="page_add" :disabled="new_house.photo==''">下一步</el-button>
         </div>
 
 
       </div>
       <div v-if="page==2">
-          <el-col :span="12">
-            <h5>向房客描述一下你的房间周边环境</h5>
-            <el-input
-              type="textarea"
-              :rows="2"
-              placeholder="周边的交通环境描述等"
-              v-model="new_house.house_text">
-            </el-input>
-            <h5>我的房子最适合</h5>
-            <div v-for="key in new_house.suit">
-              <el-checkbox v-model="key.model">{{key.label}}</el-checkbox>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12 one_add">
+              <h5>周边环境介绍</h5>
+
             </div>
-            <el-button @click="page_minus">返回</el-button>
-            <el-button @click="page_add">下一步</el-button>
-          </el-col>
-          <el-col :span="12">
 
 
-          </el-col>
+            <div class="col-md-12">
+              <span class="text_">
+向房客描述一下你的房间周边环境
+              </span>
+              <el-input
+                type="textarea"
+                :rows="2"
+                placeholder="周边的交通环境描述等"
+                v-model="new_house.house_text">
+              </el-input>
+            </div>
 
 
-        </el-row>
-      </div>
-      <div v-if="page==3">
-        <el-row>
-          <el-col :span="24">
-            <el-progress :text-inside="true" :stroke-width="18" :percentage="20"></el-progress>
-          </el-col>
-          <el-col :span="12">
-            <h5>给您的房子添加一个标题吧</h5>
-            <el-input v-model="new_house.house_title">
-            </el-input>
-            <h5>
-              好的房屋名称可以增加房客的点击率，房屋名称可包含：地标/位置/附近交通+房屋特色。
-            </h5>
-            <el-button @click="page_minus">上一步</el-button>
-            <el-button @click="page_add">下一步</el-button>
-          </el-col>
-          <el-col :span="12"></el-col>
-        </el-row>
-      </div>
-      <div v-if="page==4">
-        <el-row>
-          <el-col :span="12">
-            <div>
-              <div><h2>做的好!{{get_user.username}}</h2>
-                <h5>还有最后一步</h5>
-                <span>例如一些床和浴室的详情</span>
-                <el-button @click="page=1">更改</el-button>
-                <i class="el-icon-circle-check"></i>
-                <hr>
+            <div class="col-md-12">
+
+              <span class="text_">我的房子最适合</span>
+              <div v-for="key in new_house.suit">
+                <el-checkbox v-model="key.model">{{key.label}}</el-checkbox>
+              </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+              <hr style="color: #666">
+              <div class="row">
+                <div class="col-md-6 btn_back_one">
+                  <el-button @click="page_minus">返回</el-button>
+                </div>
+                <div class="col-md-6 btn_one">
+                  <el-button @click="page_add" :disabled="new_house.house_text==''">下一步</el-button>
+                </div>
               </div>
             </div>
+
+
+          </div>
+          <div class="col-md-6 alert_one">
+            <el-alert class="alert_warn"
+                      title="房源概要"
+                      type="warning"
+                      description="房源概要是对您房源的简要概述，房客了解房源的详细情况之前会先阅读这些信息（不要在概要中添加手机号、微信等私人联系方式）。
+您也可以在描述中告诉大家，您的房源欢迎各种不同背景的房客入住。"
+                      :closable="false"
+                      show-icon>
+            </el-alert>
+          </div>
+        </div>
+
+
+      </div>
+      <div v-if="page==3">
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12 one_add">
+              <h5>给您的房子添加一个标题吧</h5>
+            </div>
+
+            <div class="col-md-12">
+
+              <el-input v-model="new_house.house_title" placeholder="标题">
+              </el-input>
+              <span class="text_">
+              好的房屋名称可以增加房客的点击率，房屋名称可包含：地标/位置/附近交通+房屋特色。
+            </span>
+            </div>
+
+
+            <div class="col-md-12">
+              <hr style="color: #666">
+              <div class="row">
+                <div class="col-md-6 btn_back_one">
+                  <el-button @click="page_minus">返回</el-button>
+                </div>
+                <div class="col-md-6 btn_one">
+                  <el-button @click="page_add" :disabled="plan_tr">下一步</el-button>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="col-md-6 alert_one">
+            <el-alert class="alert_warn"
+                      title="房源概要"
+                      type="warning"
+                      description="房源概要是对您房源的简要概述，房客了解房源的详细情况之前会先阅读这些信息（不要在概要中添加手机号、微信等私人联系方式）。
+您也可以在描述中告诉大家，您的房源欢迎各种不同背景的房客入住。"
+                      :closable="false"
+                      show-icon>
+            </el-alert>
+          </div>
+
+
+        </div>
+
+
+      </div>
+      <div v-if="page==4">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="title_">
+              <h5>还差最后一步!</h5>
+              <span class="bot_ma">接下来,设定价格,完成最后一步</span>
+            </div>
+
+
+            <div class="one_title">
+              <span>一些床和浴室的详情</span>
+              <i class="el-icon-circle-check ico_one"></i>
+              <br>
+              <el-button type="text" @click="page=1">更改</el-button>
+            </div>
+
+            <hr>
             <div>
-              <span>添加照片,描述,标题</span>
-              <el-button @click="page=1">更改</el-button>
-              <i class="el-icon-circle-check"></i>
+
+
+              <div class="div">
+                <span class="sm_te">步骤2</span>
+                <br>
+                <span>添加照片,简短描述,标题</span>
+                <i class="el-icon-circle-check ico_one"></i>
+
+                <br>
+                <el-button type="text" @click="page=1">更改</el-button>
+              </div>
+
+
               <hr>
             </div>
             <div>
-              <span>设置价格,预定规则</span>
+              <span class="sm_te">步骤3</span>
+              <h5 class="co_bt">做好准备接待房客</h5>
+              <span class="co_bt">决定价格,预定设置</span>
+              <br>
+
               <router-link to="/basics3">
-                <el-button>开始吧</el-button>
+                <el-button type="primary" class="btn_zou">继续</el-button>
               </router-link>
             </div>
-          </el-col>
-          <el-col :span="12">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 1024" width="576" height="1024"
+          </div>
+
+
+          <div class="col-md-6">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 1024" width="576" height="800"
                  preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%;">
               <defs>
                 <clipPath id="animationMask_gibdFqw2jO">
@@ -726,8 +819,9 @@
                 </g>
               </g>
             </svg>
-          </el-col>
-        </el-row>
+          </div>
+
+        </div>
 
 
       </div>
@@ -754,6 +848,8 @@
         number: 3,
         img_number: 0,
         page: 1,
+        plan__: 20,
+        plan_tr: true,
       }
     },
     components: {
@@ -802,23 +898,94 @@
       get_user() {
         return this.$store.getters['get_user'];
       }
-    }
+    },
+    watch: {
+      page: function (val) {
+        if (val == 2) {
+          this.plan__ = 50;
+        } else if (val == 3) {
+          this.plan__ = 80;
+        }else if (val == 4) {
+          this.plan__ = 100;
+        }
+
+      },
+      'new_house.house_title': {
+        handler() {
+          let me = this;
+          if (this.new_house.house_title == '') {
+            me.plan_tr = true
+          } else {
+            me.plan_tr = false;
+          }
+        },
+        deep: true,
+      },
+    },
 
   })
 
 </script>
 <style lang="scss" scoped>
 
-  .btn_grup{
+  .btn_grup {
     margin-top: 20px;
     text-align: right;
 
   }
-.img_grup{
-  /*border: 1px solid #999;*/
-  padding: 10px;
-  margin-top: 30px;
-  box-shadow: 0 0 20px rgba(0,0,0,.2)
-}
 
+  .img_grup {
+    /*border: 1px solid #999;*/
+    padding: 10px;
+    margin-top: 30px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .2)
+  }
+
+  .alert_one {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .alert_warn {
+    height: 300px;
+    width: 300px;
+  }
+
+  .text_ {
+    display: block;
+    margin: 30px 0 10px 0;
+  }
+
+  .one_add {
+    text-align: center;
+    margin: 40px auto;
+  }
+
+  .title_ {
+    span {
+      margin-top: 10px;
+    }
+
+    h5 {
+      margin-top: 30px;
+    }
+  }
+
+  .ico_one {
+    margin-left: 30px;
+    color: #409eff;
+  }
+
+  .bot_ma {
+    margin-bottom: 30px;
+  }
+
+  .one_title {
+    /*border-bottom: 1px solid #999;*/
+    padding-top: 40px;
+  }
+  .btn_zou {
+    margin-top: 10px;
+  }
 </style>

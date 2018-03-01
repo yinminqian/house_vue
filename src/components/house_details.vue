@@ -1,36 +1,54 @@
 <template>
   <div>
     <nav_title></nav_title>
-    <el-row>
-      <el-col :span="12">
-        <img :src="img_1" alt="" style="width: 100%;height:300px;">
-        <el-button type="primary">查看照片</el-button>
-      </el-col>
-      <el-col :span="12">
-        <img :src="img_2" style="width: 100%;height: 300px;">
-      </el-col>
+    <hr>
 
 
-      <el-col :span="24">
-        <el-button type="text">详情</el-button>
-        <el-button type="text">评价</el-button>
-        <el-button type="text">位置</el-button>
-        <el-button type="text">须知</el-button>
-        <el-button type="text">房东</el-button>
-      </el-col>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <swiper :options="swiperOption" ref="mySwiper">
+            <!-- slides -->
+            <swiper-slide v-for="item in house_data.photo">
+              <img :src="item +'?imageView2/1/w/500/h/500'" alt="">
+            </swiper-slide>
+            <!-- Optional controls -->
+            <!--<div class="swiper-pagination"  slot="pagination"></div>-->
+            <div class="swiper-button-prev" slot="button-prev"></div>
+            <div class="swiper-button-next" slot="button-next"></div>
+            <!--<div class="swiper-scrollbar"   slot="scrollbar"></div>-->
+          </swiper>
+        </div>
+      </div>
+    </div>
 
 
-      <el-col :span="14">
-        <div>
-          <h1>{{house_data.house_title}}</h1>
-          <div>
-            <span>{{house_data.genre}}</span>
-            <span>{{house_location['city']}}</span>
+    <!--<div class="container-fluid" style="margin-top: 500px">-->
+    <!--<div class="row">-->
+    <!--<div class="col-md-12">-->
+
+    <!--<el-carousel :interval="4000"  height="200px">-->
+    <!--<el-carousel-item v-for="item in house_data.photo" :key="item">-->
+    <!--<img :src="item +'?imageView2/1/w/1000/h/200'" alt="">-->
+    <!--</el-carousel-item>-->
+    <!--</el-carousel>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="col-md-12">
+            {{house_data.location['city']}}-{{house_data.genre}}
           </div>
-          <div>
-            <!--卧室-->
-            <!--床-->
-            <!--最多住几个人-->
+
+
+          <div class="col-md-12">
+            <h4>{{house_data.house_title}}</h4>
             <span>卧室:{{house_data.room_number?house_data.room_number:0}}个</span>
             <span>床:{{house_data.bed_number?house_data.bed_number:0}}个</span>
             <span>{{house_data.toilet?house_data.toilet:0}}个卫生间</span>
@@ -38,56 +56,53 @@
           </div>
 
 
-        </div>
-        <hr style="color: #000;">
+          <hr style="color: #000;">
 
 
-        <el-col :span="12">
-          <div style="height: 100px;">
-            <img :src="lady.photo" alt="" style="height: 100px;">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-2">
+                <img :src="lady.photo+'?imageView2/1/w/80/h/80'" alt="" class="user_img">
+              </div>
+              <div class="col-md-10 username">
+                <h5>房东:{{lady.username}}</h5>
+                <span>
+                  查看主页
+                </span>
+              </div>
+
+            </div>
+
           </div>
-        </el-col>
+          <div class="col-md-12">
+            <h5>房屋描述</h5>
+            <span>{{house_data.house_text}}</span>
+          </div>
 
-        <el-col :span="12">
+
+          <div class="col-md-12">
+            <h5>设施信息</h5>
+            <div v-for="item in house_data.facility">
+              <div v-if="item.have !=='false'">{{item.title}}</div>
+            </div>
+          </div>
           <div>
-            <h4>房东:{{lady.username}}</h4>
-          </div>
-        </el-col>
-
-        <el-col :span="24">
-          <h5>房屋描述</h5>
-          {{house_data.house_text}}
-        </el-col>
-
-        <el-col :span="24">
-          <h5>设施信息</h5>
-          <div v-for="item in house_data.facility">
-            <div v-if="item.have !=='false'">{{item.title}}</div>
-          </div>
-        </el-col>
-        <el-col :span="24">
-          <div>
-            <el-col :span="12">
-              可定状态
-            </el-col>
-            <el-col :span="12">
-              最少住{{house_data.stay_min}}晚
-            </el-col>
 
 
-            <el-col :span="12">
-              提前通知
-            </el-col>
-            <el-col :span="12">
-              提前{{house_data.inform}}天通知
-            </el-col>
-            <el-col :span="12">
+            <div class="col-md-12">
+              <h5>可定状态</h5>
+              <span>最少住{{house_data.stay_min}}晚</span>
+              <h5>提前通知</h5>
+              <span>提前{{house_data.inform}}天通知</span>
+            </div>
+
+
+            <div class="col-md-12">
               房源类型
-            </el-col>
-            <el-col :span="12">
               {{house_data.genre}}/{{house_data.house_genre}}/{{house_data.bedroom_genre}}
-            </el-col>
-            <el-col :span="24">
+            </div>
+
+            <div class="col-md-12">
               <h5>便利设施</h5>
               <div v-for="item in house_data.convenience">
                 <div v-if="item.have !=='false'">
@@ -96,59 +111,86 @@
                   </span>
                 </div>
               </div>
-            </el-col>
+            </div>
+            <div class="col-md-12">
+              <h5>好处</h5>
+              <div v-for="item in house_data.regulation">
+                <span v-if="item.mode">
+                  {{item.label}}
+                </span>
 
-            <el-col :span="24">
+
+              </div>
+
+
+            </div>
+
+
+            <div class="col-md-12">
               <h5>评价</h5>
+              <span>
+              开发中
+            </span>
+            </div>
 
 
-            </el-col>
-            <el-col :span="24">
+            <div class="col-md-12">
               <h5>位置</h5>
-            </el-col>
-            <el-col :span="24">
+              <span>具体位置:{{house_data.location['state']}} {{house_data.location['city']}} {{house_data.location['street']}} {{house_data.location['plot']}}</span>
+            </div>
+
+
+            <div class="col-md-12">
+              <amap location='house_data.location'></amap>
+            </div>
+
+
+            <div class="col-md-12">
               <h5>须知</h5>
-            </el-col>
+
+              <div v-for="item in house_data.string">
+                <span v-if="! item.mode">
+                  {{item.label}}
+                </span>
+                {{item.guest_title}}
+                {{item.landlord_title}}
+              </div>
+            </div>
 
 
-            <el-col :span="24">
+            <div class="col-md-12">
               <h5>房东</h5>
-            </el-col>
-
+              {{lady}}
+            </div>
 
           </div>
 
-
-        </el-col>
-
-
-      </el-col>
-
-      <el-col :span="10">
-        <h5>
-          预定面板
-        </h5>
-
-        <div class="block">
-          <span class="demonstration">选择入住时间</span>
-          <br>
-          <el-date-picker
-            v-model="value6"
-            type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            :picker-options="pickerOptions1"
-          >
-          </el-date-picker>
+        </div>
+        <div class="col-md-6">
+          <h5>预定面板</h5>
+          <div class="block">
+            <span class="demonstration">选择入住时间</span>
+            <br>
+            <el-date-picker
+              v-model="value6"
+              type="daterange"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              :picker-options="pickerOptions1"
+            >
+            </el-date-picker>
 
 
-          <el-button @click="sub_state">提交我的预定</el-button>
+            <el-button @click="sub_state">提交我的预定</el-button>
+          </div>
         </div>
 
 
-      </el-col>
-    </el-row>
+      </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -157,12 +199,22 @@
   import Sender from '../Sender/sender'
   import cfg from '../../.cfg'
   import nav_title from './nav'
+  import amap from './amap'
+
 
   export default ({
     name: "house_details",
     data() {
       let me = this;
       return {
+        swiperOption: {
+          slidesPerView: 2,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+
+        },
         house_data: {},
         img_1: '',
         img_2: '',
@@ -193,6 +245,9 @@
       },
       user_msg: function () {
         return this.$store.getters['get_user'];
+      },
+      swiper() {
+        return this.$refs.mySwiper.swiper
       }
     },
 
@@ -200,6 +255,7 @@
     props: ['id'],
     components: {
       nav_title: nav_title,
+      amap: amap,
     },
 
     created: function () {
@@ -261,6 +317,8 @@
       }
     },
     mounted: function () {
+
+
       new Date().toLocaleDateString();
     }
   })
@@ -269,7 +327,32 @@
 </script>
 
 
-<style>
+<style lang="scss" scoped>
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
+  }
 
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+
+  .user_img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
+  .username {
+    text-align: left;
+    padding-top: 15px;
+  }
 
 </style>

@@ -875,14 +875,6 @@
     margin: 40px auto;
   }
 
-  .btn_one {
-    text-align: right;
-  }
-
-  .btn_back_one {
-    text-align: left;
-  }
-
   /*.btn_back_one, .btn_one {*/
   /*position: fixed;*/
   /*bottom: 100px;*/
@@ -927,7 +919,7 @@
     span {
       margin-top: 10px;
     }
-  ,
+
   h5 {
     margin-top: 30px;
   }
@@ -947,10 +939,12 @@
     font-size: 13px;
     color: #666;
   }
-  .btn_zou{
+
+  .btn_zou {
     margin-top: 10px;
   }
-  .co_bt{
+
+  .co_bt {
     color: #666;
   }
 </style>

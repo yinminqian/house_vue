@@ -6,6 +6,7 @@ import more_house from '@/components/more_house'
 import house_material from '@/components/house_details'
 import nav_title from '@/components/nav'
 import basics1 from '../components/release/basics1'
+import room from '../components/release/room'
 import basics2 from '../components/release/basics2'
 import basics3 from '../components/release/basics3'
 import admin_home from '../components/admin/admin_home'
@@ -110,5 +111,13 @@ export default new Router({
       name: 'nav',
       component: nav_title
     },
+
+    {
+      path: '/room',
+      name: 'room',
+      component: room
+    },
+
+
   ]
 })

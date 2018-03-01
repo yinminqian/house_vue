@@ -1,16 +1,24 @@
 <template>
   <div>
-    <!-- 图片上传组件辅助-->
+    <nav_></nav_>
 
-    <div>
-      <el-row>
-        <el-col :span="12">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="add_">添加标题</h5>
+          <span class="text__">(必须)</span>
           <el-input v-model="title"
-                    placeholder='添加一个标题'
-          >
+                    placeholder='添加一个标题'>
           </el-input>
-        </el-col>
-        <el-col :span="12">
+        </div>
+
+        <div class="col-md-12">
+          <h5 class="add_">
+            添加封面图
+          </h5>
+          <span class="text__">
+            (必须)
+          </span>
           <el-upload
             class="upload-demo"
             :action="serverUrl"
@@ -23,45 +31,52 @@
             <el-button size="small" type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
+        </div>
 
 
-        </el-col>
-      </el-row>
+        <div class="col-md-12">
+
+          <el-upload
+            class="avatar-uploader"
+            :action="serverUrl"
+            :data="token"
+            :show-file-list="false"
+            :on-success="uploadSuccess"
+            :on-error="uploadError"
+            :before-upload="beforeUpload"
+          >
+          </el-upload>
+          <quill-editor
+            v-model="detailContent"
+            ref="myQuillEditor"
+            :options="editorOption"
+          >
+          </quill-editor>
+        </div>
+
+
+        <div class="col-md-12 btn_grup">
+          <el-button
+            @click="sub_save"
+          >保存
+          </el-button>
+          <el-button @click="sub_publish">
+            发表
+          </el-button>
+        </div>
+      </div>
+
 
     </div>
 
-    <el-upload
-      class="avatar-uploader"
-      :action="serverUrl"
-      :data="token"
-      :show-file-list="false"
-      :on-success="uploadSuccess"
-      :on-error="uploadError"
-      :before-upload="beforeUpload"
-    >
-    </el-upload>
-    <!--富文本编辑器组件-->
-    <el-row>
-      <quill-editor
-        v-model="detailContent"
-        ref="myQuillEditor"
-        :options="editorOption"
-      >
-      </quill-editor>
-    </el-row>
-    <el-button
-      @click="sub_save"
-    >保存
-    </el-button>
-    <el-button @click="sub_publish">
-      发表
-    </el-button>
+
   </div>
 </template>
 <script>
 
   import Sender from '../../Sender/sender'
   import cfg from '../../../.cfg'
+  import nav_ from '../nav'
 
   const toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -93,7 +108,7 @@
         fileList2: [],
         title: '',
         show_: 0,
-        cover_photo:'',
+        cover_photo: '',
         quillUpdateImg: false, // 根据图片上传状态来确定是否显示loading动画，刚开始是false,不显示
         serverUrl: 'http://up-z2.qiniup.com',  // 这里写你要上传的图片服务器地址
         detailContent: '', // 富文本内容
@@ -118,6 +133,9 @@
         }
       }
     },
+    components: {
+      nav_: nav_
+    },
     methods: {
 
       handleRemove(file, fileList) {
@@ -128,7 +146,7 @@
       },
       head_photo(file) {
         if (file.hash) {
-          this.cover_photo= 'http://ovygmwfnp.bkt.clouddn.com/' + file.hash;
+          this.cover_photo = 'http://ovygmwfnp.bkt.clouddn.com/' + file.hash;
         }
       },
 
@@ -193,7 +211,7 @@
         story.content = this.detailContent;
         story.detection = this.detection;
         story.publish = this.show_;
-        story.cover_photo=this.cover_photo;
+        story.cover_photo = this.cover_photo;
         return story;
       },
       detection: function () {
@@ -206,3 +224,19 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .btn_grup{
+    text-align: right;
+    margin-top: 20px;
+  }
+  .text__{
+    display: block;
+    font-size: 13px;
+    color: #999;
+    margin: 10px 0;
+  }
+  .add_{
+    margin: 20px 0 10px 0;
+  }
+</style>

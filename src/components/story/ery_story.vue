@@ -1,101 +1,146 @@
 <template>
+  <div>
+    <nav_>
+    </nav_>
+    <hr>
 
-  <div style="width: 70%;margin: 0 auto">
-    <el-row>
-
-      <el-col :span="24">
-        <img :src="writer.photo" alt="" width="50px">
-        {{writer.username}}
-        <span v-if="time_">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="con_user_">
+            <div class="row">
+              <div class="ll">
+                <img :src="writer.photo+'?imageView2/1/w/300/h/300'" alt="" width="50px" class="user_img">
+              </div>
+              <div class="ll ll_text">
+                {{writer.username}}
+                <br>
+                <span v-if="time_">
           {{time_}}天之前
         </span>
-        <span v-else>
+                <span v-else>
           今天
         </span>
-      </el-col>
-
-      <el-col :span="24">
-        <div class="content">
-        </div>
-
-        <div class="love_coll">
-          赞:{{story.love}}
-          <br>
-          收藏{{story.collect}}
-        </div>
-        <div class="uu">
-          <div>
-            <button v-if="love_show" @click="love_btn">
-              点赞
-            </button>
-            <button v-if="! love_show" @click="yet_love">
-              已赞
-            </button>
-            <button v-if="collect_show" @click="collect_btn">
-              收藏
-            </button>
-          </div>
-
-
-          <div>
-
-
-            <button v-if="! collect_show" @click="yet_collect">
-              已经收藏
-            </button>
-
-          </div>
-
-        </div>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="24">
-        评论
-      </el-col>
-      <el-col :span="24">
-        <el-input v-model="comment.comment">
-
-        </el-input>
-        <el-button @click="btn_comment">
-          发送
-        </el-button>
-      </el-col>
-    </el-row>
-
-    <el-row>
-      <el-col :span="24">
-        <div v-for="item in comments">
-          <div>
-            <div v-if="item.parent">
-              {{item.parent}}回复
+              </div>
             </div>
-            <span>
+          </div>
+        </div>
+        <div class="col-md-12 ma_30">
+          <div class="content">
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="con_user_">
+
+
+            <div class="love_coll">
+
+              <span class="fa fa-thumbs-up">
+              {{story.love}}
+              </span>
+              <span class="fa fa-bookmark collect_ico">
+              {{story.collect}}
+              </span>
+
+            </div>
+
+
+            <div class="col-md-12 btn_grup">
+              <div class="row">
+
+                <div class="col-md-6 love_btn">
+                  <button v-if="!love_show" @click="love_btn" class="bnt_live">点赞</button>
+                  <button v-if=" love_show" @click="yet_love" class="bnt_live">已赞</button>
+                </div>
+
+                <div class="col-md-6">
+                  <button v-if="!collect_show" @click="collect_btn" class="bnt_live">收藏</button>
+                  <button v-if="collect_show" @click="yet_collect" class="bnt_live">已收藏</button>
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+            <div class="col-md-12 ma_no">
+              <h5>
+                评论
+              </h5>
+            </div>
+            <div class="col-md-12 ma_no">
+              <el-input v-model="comment.comment">
+              </el-input>
+            </div>
+            <div class="col-md-12 ma_no btn_com">
+              <el-button @click="btn_comment">
+                发送
+              </el-button>
+              <hr>
+            </div>
+
+
+            <div class="col-md-12 ma_no">
+              <div class="row">
+
+
+                <div v-for="item in comments" class="col-md-12 item">
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div v-if="item.parent" class="reply">
+                        {{item.parent}} 回复
+                      </div>
+                      <span>
             {{item.username}}
             </span>
+                    </div>
 
 
-            <span>
-              {{item.time}}天之前
-            </span>
+                    <div class="col-md-6" style="text-align: right;color: #999;font-size: 13px">
+                      {{item.time}}天之前
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-md-12">{{item.comment}}</div>
+
+
+                  <button v-if="item.reply" @click="item.reply = !item.reply" class="fa fa-reply bnt_reply"> 回复</button>
+
+
+                  <div class="col-md-12">
+                    <el-input v-if="! item.reply" v-model="level2_comment.comment">
+                    </el-input>
+                  </div>
+
+
+                  <div class="col-md-12" style="text-align: right;margin-top: 10px">
+                    <button v-if="! item.reply" @click="item.reply = !item.reply" class="two_re">取消</button>
+                    <button v-if="! item.reply" @click="item.reply = !item.reply;level2_comment_btn(item.id)"
+                            class="two_re">
+                      发送
+                    </button>
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
           </div>
-          <div>{{item.comment}}</div>
 
 
-          <button v-if="item.reply" @click="item.reply = !item.reply">回复</button>
-          <el-input v-if="! item.reply" v-model="level2_comment.comment">
-
-          </el-input>
-          <button v-if="! item.reply" @click="item.reply = !item.reply">取消</button>
-          <button v-if="! item.reply" @click="item.reply = !item.reply;level2_comment_btn(item.id)">
-            发送
-          </button>
         </div>
-      </el-col>
-    </el-row>
+      </div>
+    </div>
+
+
   </div>
-
-
 </template>
 
 
@@ -103,6 +148,7 @@
   import Sender from '../../Sender/sender'
   import cfg from '../../../.cfg'
   import $ from 'jquery'
+  import nav_ from '../nav'
 
   export default ({
     name: "ery_story",
@@ -121,6 +167,9 @@
         },
         comments: [],
       }
+    },
+    components: {
+      nav_: nav_
     },
     props: ['id'],
     created: function () {
@@ -225,11 +274,17 @@
         })
       },
       btn_comment: function () {
+        let me = this;
         this.comment.user_id = this.now_user.id;
         this.comment.article_id = this.story.id;
+        console.log("this.comment", this.comment);
         Sender.post(cfg.api + '/api/story_comments/add', this.comment)
           .then(function (data) {
             console.log("data", data);
+            me.read_comment()
+            me.comment = {
+              comment: '',
+            }
           })
       },
       read_comment: function () {
@@ -243,20 +298,25 @@
 
 
       level2_comment_btn: function (item) {
-        let me =this;
+        let me = this;
         this.level2_comment.user_id = this.now_user.id;
         this.level2_comment.article_id = this.story.id;
         this.level2_comment.parent_id = item;
         Sender.post(cfg.api + '/api/story_comments/add', this.level2_comment)
           .then(function (data) {
             me.read_comment()
+            me.level2_comment =
+              {
+                comment: '',
+              }
+
           })
 
 
       }
     },
     updated: function () {
-      $('.test').find('p').css('color', 'blue');
+      $('.test').find('img').css('width', '100%');
     },
     mounted: function () {
 
@@ -265,7 +325,8 @@
 
   });
 </script>
-<style scoped>
+<style lang="scss" scoped>
+
   .test p {
     color: red;
   }
@@ -276,5 +337,82 @@
 
   .son {
     background-color: aqua;
+  }
+
+  .content, .con_user_ {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .user_img {
+    border-radius: 50%;
+  }
+
+  .ll {
+    display: inline-block;
+    margin-left: 5px;
+  }
+
+  .ll_text {
+    margin-left: 15px;
+  }
+
+  .collect_ico {
+    margin-left: 30px;
+  }
+
+  .bnt_live {
+    border-radius: 50%;
+    border: 1px solid #999;
+    background: #F8F8F7;
+    width: 100px;
+    height: 100px;
+    outline: none;
+  }
+
+  .love_btn {
+    text-align: right;
+  }
+
+  .btn_grup {
+    margin: 20px 0;
+  }
+
+  .ma_no {
+    margin: 0;
+    padding: 0;
+  }
+
+  .btn_com {
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  .ma_30 {
+    margin-top: 30px;
+  }
+
+  .reply {
+    display: inline-block;
+  }
+
+  .item {
+    margin-top: 10px;
+  }
+
+  .bnt_reply {
+    background: #fff;
+    border: none;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .two_re {
+    background: #fff;
+    border: none;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
   }
 </style>

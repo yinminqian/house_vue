@@ -1,146 +1,284 @@
 <template>
   <div>
     <nav_title msg_title="3:完善您的预定规则"></nav_title>
-    <el-row>
 
+    <div class="container-fluid bas_2" style="margin: 0;padding:0;">
+      <el-progress :text-inside="true" :stroke-width="18" :percentage="plan__"></el-progress>
+    </div>
+
+    <div class="container">
       <div v-if="page==1">
-        <el-col :span="24">
-          <el-progress :text-inside="true" :stroke-width="18" :percentage="20"></el-progress>
-        </el-col>
-        <el-col :span="12">
-          <div v-for="key in new_house.string">
-            <span>{{key.guest_title}}</span>
+        <div class="row">
+          <div class="col-md-6">
+
+
+            <div class="col-md-12">
+   <span class="text_">
+      房东要遵守的
+    </span>
+              <div v-for="key in new_house.string">
+                <span class="item_sp">{{key.guest_title}}</span>
+              </div>
+
+            </div>
+
+            <div class="col-md-12">
+              <span class="text_">房客要遵守的</span>
+              <div v-for="key in new_house.string">
+                <span class="item_sp">{{key.landlord_title}}</span>
+              </div>
+            </div>
+            <div class="col-md-12 ma_10">
+              <el-button type="text" v-if="show_suit" @click="show_max_suit">添加更多对房客的要求</el-button>
+              <div v-if="show_detail" v-for="key in new_house.string">
+                <el-checkbox v-if="key.label" v-model="key.model">{{key.label}}</el-checkbox>
+              </div>
+
+
+            </div>
+
+
+            <div class="col-md-12">
+              <hr style="color: #666">
+              <div class="row">
+                <div class="col-md-6 btn_back_one">
+
+                </div>
+                <div class="col-md-6 btn_one">
+                  <el-button @click="page_add">下一步</el-button>
+                </div>
+              </div>
+            </div>
+
+
           </div>
-          <h5>房客要遵守的</h5>
-          <div v-for="key in new_house.string">
-            <span>{{key.landlord_title}}</span>
+          <div class="col-md-6 alert_one">
+            <el-alert class="alert_warn"
+                      title="约定和守约"
+                      type="warning"
+                      description="为了让您对每一次预订都觉得放心，我们要求每位房客在预订之前提供某些特定的信息。"
+                      :closable="false"
+                      show-icon>
+            </el-alert>
           </div>
-          <el-button type="text" v-if="show_suit" @click="show_max_suit">添加更多对房客的要求</el-button>
-          <div v-if="show_detail" v-for="key in new_house.string">
-            <el-checkbox v-if="key.label" v-model="key.model">{{key.label}}</el-checkbox>
-          </div>
-          <el-button>返回</el-button>
-          <el-button @click="page_add">下一步</el-button>
-        </el-col>
-        <el-col :span="12"></el-col>
+        </div>
+
+
       </div>
       <div v-if="page==2">
-        <el-col :span="24">
-          <el-progress :text-inside="true" :stroke-width="18" :percentage="20"></el-progress>
-        </el-col>
-        <el-col :span="12">
-          <div v-for="key in new_house.regulation">
-            <div v-if="key.label">
-              <span>{{key.label}}</span>
-              <el-switch
-                v-model="key.model"
-                active-color="#13ce66"
-                inactive-color="#666666">
-              </el-switch>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12 ma_20">
+              <h5>为房客制定房屋守则</h5>
             </div>
-          </div>
-          <div>
-            <h5>制定其他规则</h5>
-            <div v-for=" key in new_house.regulation">
-              <div v-if="key.other_msg">
-                {{key.other_msg}}
-                <i v-model="key.other_number" class="el-icon-delete" @click="rm_other(key.other_number)"></i>
+
+            <div class="col-md-12 ma_20">
+              <div v-for="key in new_house.regulation">
+                <div v-if="key.label">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <span>{{key.label}}</span>
+                    </div>
+                    <div class="col-md-6">
+                      <el-switch
+                        v-model="key.model"
+                        active-color="#13ce66"
+                        inactive-color="#666666">
+                      </el-switch>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 ma_20">
+              <h5>制定其他规则</h5>
+              <div v-for=" key in new_house.regulation">
+                <div v-if="key.other_msg">
+                  {{key.other_msg}}
+                  <i v-model="key.other_number" class="el-icon-delete" @click="rm_other(key.other_number)"></i>
+                </div>
+              </div>
+
+
+              <div>
+                <el-input placeholder="比如不能穿鞋" v-model="other.other_msg"></el-input>
+                <input type="text" hidden v-model="other.other_model">
+                <el-button @click="push_other" class="btn_add_">添加</el-button>
+              </div>
+            </div>
+            <div class="col-md-12 ma_20">
+              <h5>对于您的房源，房客必须了解的信息</h5>
+              <div v-for="key in new_house.regulation">
+                <div v-if="key.label_guest">
+                  <el-checkbox v-model="key.model">{{key.label_guest}}</el-checkbox>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-12">
+              <hr style="color: #666">
+              <div class="row">
+                <div class="col-md-6 btn_back_one">
+                  <el-button @click="page_minus">返回</el-button>
+                </div>
+                <div class="col-md-6 btn_one">
+                  <el-button @click="page_add">下一步</el-button>
+                </div>
               </div>
             </div>
 
 
-            <div>
-              <el-input placeholder="比如不能穿鞋" v-model="other.other_msg"></el-input>
-              <input type="text" hidden v-model="other.other_model">
-              <el-button @click="push_other">添加</el-button>
-            </div>
           </div>
-          <div>
-            <h5>对于您的房源，房客必须了解的信息</h5>
-            <div v-for="key in new_house.regulation">
-              <div v-if="key.label_guest">
-                <el-checkbox v-model="key.model">{{key.label_guest}}</el-checkbox>
-              </div>
-            </div>
-            <el-button>返回</el-button>
-            <el-button @click="page_add">下一步</el-button>
+          <div class="col-md-6 alert_one">
+            <el-alert class="alert_warn"
+                      title="约定和守约"
+                      type="warning"
+                      description="除了符合爱彼迎的要求外，房客还必须同意您的所有房屋守则才能预订住宿。
+如果某个预订让您觉得不安心，您可以在旅程开始前或住宿期间取消预订而免受处罚。"
+                      :closable="false"
+                      show-icon>
+            </el-alert>
           </div>
+        </div>
 
-        </el-col>
-        <el-col :span="12"></el-col>
 
       </div>
       <div v-if="page==3">
-        <el-row>
-          <el-col :span="24">
-            <el-progress :text-inside="true" :stroke-width="18" :percentage="80"></el-progress>
-          </el-col>
-          <el-col :span="12">
-            <h5>您希望房客入住时提前几天通知你</h5>
-            <el-input-number v-model="new_house.inform" :min="1" :max="10" label="描述文字"></el-input-number>
-            <h5>房客可以住多久</h5>
-            <el-slider
-              v-model="new_house.stay_min"
-              show-input>
-            </el-slider>
-            <h5>最大</h5>
-            <el-slider
-              v-model="new_house.stay_max"
-              show-input>
-            </el-slider>
-            <el-button>返回</el-button>
-            <el-button @click="page_add">下一步</el-button>
-          </el-col>
-          <el-col :span="12">
-          </el-col>
-        </el-row>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12 one_add">
+              <h5>提前通知</h5>
+            </div>
+            <div class="col-md-12">
+              <span class="text_">您希望房客入住时提前几天通知你</span>
+              <el-input-number v-model="new_house.inform" :min="1" :max="10" label="描述文字"></el-input-number>
+            </div>
+
+
+            <div class="col-md-12">
+              <span class="text_">房客可以住多久</span>
+              <el-slider
+                v-model="new_house.stay_min"
+                show-input>
+              </el-slider>
+              <span class="text_">最大</span>
+              <el-slider
+                v-model="new_house.stay_max"
+                show-input>
+              </el-slider>
+            </div>
+
+
+            <div class="col-md-12">
+              <hr style="color: #666">
+              <div class="row">
+                <div class="col-md-6 btn_back_one">
+                  <el-button @click="page_minus">返回</el-button>
+                </div>
+                <div class="col-md-6 btn_one">
+                  <el-button @click="page_add">下一步</el-button>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+
+          <div class="col-md-6 alert_one">
+            <el-alert class="alert_warn"
+                      title="提前通知"
+                      type="warning"
+                      description="提前通知不至于让你手忙脚乱的准备,也不会让你在深夜接到预定电话,总之,万事先计划."
+                      :closable="false"
+                      show-icon>
+            </el-alert>
+          </div>
+
+
+        </div>
 
       </div>
       <div v-if="page==4">
-        <el-row>
-          <el-col :span="24">
-            <el-progress :text-inside="true" :stroke-width="18" :percentage="20"></el-progress>
-          </el-col>
-          <el-col :span="12">
-            <h3>智能定价</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12 one_add">
+              <h3>智能定价</h3>
+            </div>
+            <div class="col-md-12 ma_20">
+              <span class="ma__">至少</span>
+              <el-input v-model="new_house.min_price" placeholder="至少" type="number"></el-input>
+              <span class="ma__">最多</span>
+              <el-input v-model="new_house.max_price" placeholder="最高" type="number"></el-input>
+            </div>
+            <div class="col-md-12 ma_20">
+              <span class="ma__">当然,你可以设置固定价格</span>
+              <el-input v-model="new_house.fixation" placeholder="固定价格" type="number"></el-input>
+            </div>
+            <div class="col-md-12 ma_20">
+              <span>房客的长期居住可以为你免去很多清洁费用</span>
+              <span>为长期居住的房客设置一个折扣吧</span>
+              <span class="ma__">周租折扣</span>
+              <el-input v-model="new_house.weeks_discount" placeholder="周租折扣" type="number"></el-input>
+              <span class="ma__">月租折扣</span>
+              <el-input v-model="new_house.mouth_discount" placeholder='月租折扣' type="number"></el-input>
+            </div>
 
-            <h5>至少</h5>
-            <el-input v-model="new_house.min_price" placeholder="至少"></el-input>
-            <h5>最多</h5>
-            <el-input v-model="new_house.max_price" placeholder="最高"></el-input>
-            <h4>当然,你可以设置固定价格</h4>
-            <el-input v-model="new_house.fixation" placeholder="固定价格"></el-input>
-            <h4>房客的长期居住可以为你免去很多清洁费用</h4>
-            <h4>为长期居住的房客设置一个折扣吧</h4>
-            <h6>周租折扣</h6>
-            <el-input v-model="new_house.weeks_discount" placeholder="周租折扣"></el-input>
-            <h6>月租折扣</h6>
-            <el-input v-model="new_house.mouth_discount" placeholder='月租折扣'></el-input>
 
-            <el-button>返回</el-button>
-            <el-button @click="page_add">下一步</el-button>
-          </el-col>
-          <el-col :span="12">
+            <div class="col-md-12">
+              <hr style="color: #666">
+              <div class="row">
+                <div class="col-md-6 btn_back_one">
+                  <el-button @click="page_minus">返回</el-button>
+                </div>
+                <div class="col-md-6 btn_one">
+                  <el-button @click="page_add"
+                             :disabled="new_house.weeks_discount==''||new_house.mouth_discount==''||new_house.fixation==''||new_house.max_price==''||new_house.min_price==''">
+                    下一步
+                  </el-button>
+                </div>
+              </div>
+            </div>
 
-          </el-col>
 
-        </el-row>
+          </div>
+
+
+          <div class="col-md-6 alert_one">
+            <el-alert class="alert_warn"
+                      title="价格提示"
+                      type="warning"
+                      description="适合的价格会随类似房源被搜索的次数上升或下降。不管您的选择是什么，您都会获得定价小窍门，帮助您为房源定价。"
+                      :closable="false"
+                      show-icon>
+            </el-alert>
+          </div>
+
+        </div>
+
 
       </div>
       <div v-if="page==5">
-        <el-row>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-12 one_add">
+              <h5>您已准备好发布房源！</h5>
+            </div>
+            <div class="col-md-12">
+              <span>点击发布之后，您可以很方便地设置可订状态，然后您就可以准备欢迎第一位房客了。</span>
+            </div>
 
-          <el-col :span="24">
+            <div class="col-md-12 ma_20">
+              <el-button type="primary" @click="submit_">马上提交</el-button>
 
-          </el-col>
-          <el-col :span="12">
-            <h1>您已准备好发布房源！</h1>
-            <h5>点击发布之后，您可以很方便地设置可订状态，然后您就可以准备欢迎第一位房客了。</h5>
-            <el-button @click="submit_">马上提交</el-button>
-            <el-button @click="save_">先保存,择日提交</el-button>
-          </el-col>
-          <el-col :span="12">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 1024" width="576" height="1024"
+            </div>
+            <!--<el-button @click="save_">先保存,择日提交</el-button>-->
+          </div>
+
+          <div class="col-md-6">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 1024" width="576" height="700"
                  preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%;">
               <defs>
                 <clipPath id="animationMask_HMDDCUDhbj">
@@ -776,12 +914,12 @@
                 </g>
               </g>
             </svg>
-          </el-col>
-        </el-row>
+          </div>
+        </div>
 
 
       </div>
-    </el-row>
+    </div>
   </div>
 </template>
 
@@ -790,6 +928,7 @@
   import nav_title from './basics_bar'
   import Sender from '../../Sender/sender'
   import cfg from '../../../.cfg'
+
   export default ({
     name: 'basics3',
     data() {
@@ -803,8 +942,10 @@
           other_msg: '',
           other_number: 1
         },
-        save_state:0,
-        submit_state:0,
+        save_state: 0,
+        submit_state: 0,
+        plan__: 20,
+        plan: true,
       }
     },
     methods: {
@@ -830,12 +971,25 @@
           }
         })
       },
-      submit_(){
-        this.submit_state=1;
+      submit_() {
+        this.submit_state = 1;
       },
-      save_(){
-        this.save_state=1;
-      }
+      save_() {
+        this.save_state = 1;
+      },
+      open3() {
+        this.$notify({
+          title: '添加成功',
+          message: '为您跳转详情页',
+          type: 'success'
+        });
+      },
+      open6() {
+        this.$notify.error({
+          title: '错误',
+          message: '失败了,试着刷新一下页面进行重新添加,点击左上角回主页'
+        });
+      },
     },
     watch: {
       'new_house.regulation': {
@@ -847,16 +1001,34 @@
         },
         deep: true,
       },
-      submit_state:function () {
-        Sender.post(cfg.api+'/api/house/add',this.new_house)
+      page: function (val) {
+        if (val == 2) {
+          this.plan__ = 40;
+        } else if (val == 3) {
+          this.plan__ = 60;
+        } else if (val == 4) {
+          this.plan__ = 80;
+        } else if (val == 5) {
+          this.plan__ = 100;
+        }
+      },
+      submit_state: function () {
+        let me =this;
+        Sender.post(cfg.api + '/api/house/add', this.new_house)
           .then(function (data) {
-            console.log("data",data);
+            if (data.success) {
+              me.open3();
+              me.$router.push({path:'/house_material/'+data.data.id});
+
+            } else {
+              me.open6();
+            }
           })
+      },
+      save_state: function () {
         // this.$router.push({path:''})
       },
-      save_state:function () {
-        // this.$router.push({path:''})
-      }
+
     },
 
     components: {
@@ -874,4 +1046,50 @@
 </script>
 
 
-<style></style>
+<style lang="scss" scoped>
+
+
+  .alert_one {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .alert_warn {
+    height: 300px;
+    width: 300px;
+  }
+
+  .text_ {
+    display: block;
+    margin: 10px 0;
+    font-weight: 500;
+  }
+
+  .item_sp {
+    color: #666;
+  }
+
+  .ma_10 {
+    margin-top: 10px;
+  }
+
+  .one_add {
+    text-align: center;
+    margin: 40px auto;
+  }
+
+  .ma_20 {
+    margin-top: 20px;
+  }
+
+  .btn_add_ {
+    margin-top: 10px;
+  }
+
+  .ma__ {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+</style>
