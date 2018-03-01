@@ -224,8 +224,8 @@
         let me = this;
         Sender.post(cfg.api + '/api/islogin')
           .then(function (data) {
-            if (data.success) {
               console.log("data12121",data);
+            if (data.success) {
               me.user = data.data;
               me.show_login = data.success;
             }else {
