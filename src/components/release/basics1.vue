@@ -302,7 +302,7 @@
       <div v-show="page==5">
 
         <div class="col-md-12 mamp__">
-          <amap location='new_house.location'></amap>
+          <amaps location='new_house.location'></amaps>
         </div>
 
 
@@ -643,7 +643,7 @@
 
 
 <script>
-  import amap from '../amap'
+  import amaps from '../amaps'
 
   let grandpa_house = [
     {id: 1, name: '民宅'},
@@ -693,7 +693,7 @@
     },
     components: {
       basics_bar: basics_bar,
-      amap: amap,
+      amaps: amaps,
     },
     created: function () {
       this.$store.dispatch('is_login');

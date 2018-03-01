@@ -29,7 +29,6 @@
     data() {
       let self = this;
       return {
-        location:{},
         show_location: true,
         show: true,
         maps,
@@ -55,7 +54,6 @@
         latitude: 0,
       };
     },
-    props:['state','city','street','plot'],
     watch: {
       lng() {
         this.show = false;
@@ -70,7 +68,6 @@
               let longitude = '';
               let latitude = '';
               su.forEach(function (item, index) {
-                console.log("item",item);
                 if (index < 10) {
                   longitude += item;
                 }
@@ -86,41 +83,12 @@
       },
     },
     created: function () {
-      let me = this;
-      this.location.state=this.state;
-      this.location.city=this.city;
-      this.location.street=this.street;
-      this.location.plot=this.plot;
-console.log("this.plot",this.plot);
-      $.get('http://restapi.amap.com/v3/geocode/geo?key=bf5b356d3ffaab642c974983267b1ce8&city=' + this.location.city + '&address=' + this.location.street + this.location.plot)
-        .then(function (data) {
-          let center_ = data.geocodes[0].location;
-          let su = center_.split("");
-          let longitude = '';
-          let latitude = '';
-          su.forEach(function (item, index) {
-            console.log("item",item);
-            if (index < 10) {
-              longitude += item;
-            }
-            else if (index > 10) {
-              latitude += item;
-            }
-          })
-          me.longitude = parseFloat(longitude);
-          me.latitude = parseFloat(latitude);
-        })
-
-
-
-
     },
     computed: {
-      // location() {
-      //   return location;
-      //   let new_house = this.$store.getters['get_new_house']
-      //   return new_house.location;
-      // }
+      location() {
+        let new_house = this.$store.getters['get_new_house']
+        return new_house.location;
+      }
     }
   };
 </script>

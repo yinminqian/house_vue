@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import food from '@/components/food'
+import amap from '@/components/amap'
 import house_add from '@/components/house_add'
 import more_house from '@/components/more_house'
 import house_material from '@/components/house_details'
@@ -28,6 +29,11 @@ export default new Router({
     {
       path: '/write_story',
       component: write_story
+    },
+    {
+      path: '/amap',
+      props: true,
+      component: amap
     }
     ,
     {

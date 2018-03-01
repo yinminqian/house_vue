@@ -174,7 +174,7 @@
               <span class="vice_span">具体位置:{{house_data.location['state']}} {{house_data.location['city']}} {{house_data.location['street']}} {{house_data.location['plot']}}</span>
             </div>
             <div class="col-md-12">
-              <amap location='new_house.location'></amap>
+              <amap v-bind='new_house.location'></amap>
               <br>
 
             </div>
