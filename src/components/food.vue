@@ -4,7 +4,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-4 ico_card">
+        <div class="col-md-4 ico_card ll">
           <div class="ico_img">
           <i class="fa fa-phone ico__"></i>
           </div>
@@ -20,7 +20,7 @@
 
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-8 ll">
           <div class="row">
             <div class="col-md-4">
               <h5>爱彼迎</h5>
@@ -95,4 +95,7 @@
 .container{
   margin-bottom: 30px;
 }
+  .ll{
+    margin-top: 20px;
+  }
 </style>
