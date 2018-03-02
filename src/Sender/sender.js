@@ -8,7 +8,7 @@ function post(url, data, opt) {
     data:data,
     method:'post',
     headers:{
-      'BSESSION-TOKEN':Session.get_token()
+      'BSESSIONTOKEN':Session.get_token()
     }
   }
   opt = Object.assign({}, def, opt);
