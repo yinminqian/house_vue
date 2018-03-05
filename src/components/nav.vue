@@ -200,8 +200,6 @@
             }else {
               console.log("进入else错误");
             }
-          }, function (item) {
-            console.log("data1", item);
           })
       },
       win() {
