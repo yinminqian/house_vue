@@ -62,4 +62,7 @@
   a {
     text-decoraction: none !important;
   }
+  a:hover{
+    text-decoraction: none !important;
+  }
 </style>
