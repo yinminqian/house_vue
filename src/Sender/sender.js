@@ -16,7 +16,7 @@ function post(url, data, opt) {
 
   return $.ajax(opt)
     .then(function (data,status,res) {
-      let token=res.getResponseHeader('bsession_token');
+      let token=res.getResponseHeader('BSESSIONTOKEN');
       if (token){
         Session.set_token(token);
       }
