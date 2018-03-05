@@ -303,7 +303,7 @@
               me.lady = data;
             })
         });
-      Sender.post(cfg.api + '/api/HouseState/read_house_id?id=' + this.id)
+      Sender.post(cfg.api + '/api/House_state/read_house_id?id=' + this.id)
         .then(function (data) {
           if (data.length == 0) {
             return;
@@ -340,7 +340,7 @@
         short_obj[su] = short_arr;
         this.house_state.reserve_poke.push(short_obj);
         let me = this;
-        Sender.post(cfg.api + '/api/HouseState/add', this.house_state)
+        Sender.post(cfg.api + '/api/House_state/add', this.house_state)
           .then(function (data) {
             if (data) {
               Sender.post(cfg.api + '/api/house_state/read_house_id?id=' + me.id)
