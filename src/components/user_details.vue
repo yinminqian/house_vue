@@ -232,6 +232,7 @@
       let me = this;
       Sender.post(cfg.api + '/api/house/qiniu')
         .then(function (data) {
+          console.log("data",data);
           me.token.token = data;
         })
     },
