@@ -39,7 +39,7 @@
                 </span>
                 <el-input-number class="uu" v-model="num1" :min="1" :max="10" label="描述文字"></el-input-number>
                 <button class="btn_search">
-                  搜索
+                  搜索(不可用)
                 </button>
               </div>
 
@@ -315,7 +315,7 @@
 
   .btn_search {
     font-family: Circular, "PingFang-SC", "Hiragino Sans GB", "微软雅黑", "Microsoft YaHei", "Heiti SC" !important;
-    font-size: 19px !important;
+    font-size: 12px !important;
     line-height: 15px !important;
     /*letter-spacing: undefined !important;*/
     padding-top: 0px !important;
