@@ -66,6 +66,9 @@
     text-decoraction: none !important;
   }
   .a_text{
+      text-decoration: none;
+    }
+  .a_text:hover{
     text-decoration: none;
   }
 </style>
