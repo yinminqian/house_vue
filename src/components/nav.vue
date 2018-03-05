@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6">
-            <router-link to="/">
+            <router-link to="/" style="text-decoration: none">
               <div class="header">你好,爱彼迎</div>
             </router-link>
           </div>
