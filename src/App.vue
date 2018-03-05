@@ -65,4 +65,7 @@
   a:hover{
     text-decoraction: none !important;
   }
+  .a_text{
+    text-decoration: none;
+  }
 </style>

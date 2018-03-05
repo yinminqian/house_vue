@@ -30,10 +30,10 @@
     {{user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
                   <el-dropdown-menu slot="dropdown">
-                    <router-link to="/user_details">
+                    <router-link to="/user_details" class="a_text">
                       <el-dropdown-item>编辑我的资料</el-dropdown-item>
                     </router-link>
-                    <router-link to="/user_home_page">
+                    <router-link to="/user_home_page" class="a_text">
                       <el-dropdown-item>我的主页</el-dropdown-item>
                     </router-link>
 
