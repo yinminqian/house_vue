@@ -239,20 +239,20 @@
         this.update_collect()
       },
       update_collect: function () {
-        Sender.post(cfg.api + '/api/love_collect/add?user_id=' + this.now_user.id + '&article_id=' + this.story.id + '&collect=' + Number(this.collect_show))
+        Sender.post(cfg.api + '/api/LoveCollect/add?user_id=' + this.now_user.id + '&article_id=' + this.story.id + '&collect=' + Number(this.collect_show))
           .then(function (data) {
             console.log("data", data);
           })
       },
       update_love: function () {
-        Sender.post(cfg.api + '/api/love_collect/add?user_id=' + this.now_user.id + '&article_id=' + this.story.id + '&love=' + Number(this.love_show))
+        Sender.post(cfg.api + '/api/LoveCollect/add?user_id=' + this.now_user.id + '&article_id=' + this.story.id + '&love=' + Number(this.love_show))
           .then(function (data) {
             console.log("data", data);
           })
       },
       read_love: function () {
         let me = this;
-        Sender.post(cfg.api + '/api/love_collect/read_user_love?user_id=' + this.now_user.id + '&article_id=' + this.story.id)
+        Sender.post(cfg.api + '/api/LoveCollect/read_user_love?user_id=' + this.now_user.id + '&article_id=' + this.story.id)
           .then(function (data) {
             console.log("data", data);
             if (data.data[0].love) {
@@ -278,7 +278,7 @@
         this.comment.user_id = this.now_user.id;
         this.comment.article_id = this.story.id;
         console.log("this.comment", this.comment);
-        Sender.post(cfg.api + '/api/story_comments/add', this.comment)
+        Sender.post(cfg.api + '/api/StoryComments/add', this.comment)
           .then(function (data) {
             console.log("data", data);
             me.read_comment()
@@ -289,7 +289,7 @@
       },
       read_comment: function () {
         let me = this;
-        Sender.post(cfg.api + '/api/story_comments/read_comment?article_id=' + this.story.id)
+        Sender.post(cfg.api + '/api/StoryComments/read_comment?article_id=' + this.story.id)
           .then(function (data) {
             console.log("data", data);
             me.comments = data;
@@ -302,7 +302,7 @@
         this.level2_comment.user_id = this.now_user.id;
         this.level2_comment.article_id = this.story.id;
         this.level2_comment.parent_id = item;
-        Sender.post(cfg.api + '/api/story_comments/add', this.level2_comment)
+        Sender.post(cfg.api + '/api/StoryComments/add', this.level2_comment)
           .then(function (data) {
             me.read_comment()
             me.level2_comment =
