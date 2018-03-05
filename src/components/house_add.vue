@@ -44,7 +44,7 @@
 
         </div>
       <div class="col-md-12">
-        <router-link to="/basics1">
+        <router-link to="/basics1" class="a_text">
           <el-button class="btn_next">下一步</el-button>
         </router-link>
 

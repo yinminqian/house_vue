@@ -67,8 +67,10 @@
   }
   .a_text{
       text-decoration: none;
+    color: #212529;
     }
   .a_text:hover{
     text-decoration: none;
+    color: #409eff;
   }
 </style>

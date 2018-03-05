@@ -445,7 +445,7 @@
                 <h5>再添加房源详情</h5>
                 <span>添加照片,剪短描述,标题</span>
                 <br>
-                <router-link to="/basics2">
+                <router-link to="/basics2" class="a_text">
                   <el-button type="primary" class="btn_zou">继续</el-button>
                 </router-link>
 

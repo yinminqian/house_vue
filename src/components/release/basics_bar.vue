@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-3 title">
-        <router-link to="/">
+        <router-link to="/" class="a_text">
         <span class="logo">
           爱彼迎
         </span>

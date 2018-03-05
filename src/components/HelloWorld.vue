@@ -55,7 +55,7 @@
           <div class="row ">
             <div class="col-md-3">
               <div class="vice_card">
-<router-link to="/more_house">
+<router-link to="/more_house" class="a_text">
   <img src="../assets/8b7519ec-2c82-4c09-8233-fd4d2715bbf9.jpg" alt="" class="vice_img">
   <span class="_th">房源</span>
 </router-link>
@@ -64,7 +64,7 @@
             </div>
             <div class="col-md-3">
               <div class="vice_card">
-                <router-link to="/story_all">
+                <router-link to="/story_all" class="a_text">
                   <img src="../assets/cb8b3101-d419-4c17-8e2f-4989b39b98c3.jpg" alt="" class="vice_img">
                   <span class="_th">
                 故事
@@ -94,7 +94,7 @@
 
         <div class="col-md-4" v-for="item in house_data" style="height: 327px;">
           <div class="size_house">
-            <router-link :to="'/house_material/'+item.id">
+            <router-link :to="'/house_material/'+item.id" class="a_text">
               <!--<div class="img_show">-->
               <img :src="item.photo[0]+'?imageView2/1/w/200/h/200'" alt="" class="img_show_">
               <!--</div>-->
@@ -164,7 +164,7 @@
 
         <div class="col-md-3" v-for="item in all_story" style="height: 327px;">
           <div class="size_house">
-            <router-link :to="'/ery_story/'+item.id">
+            <router-link :to="'/ery_story/'+item.id" class="a_text">
 
             <!--<div class="img_show">-->
               <img :src="item.cover_photo+'?imageView2/1/w/300/h/300'" alt="" class="img_show_">

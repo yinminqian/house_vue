@@ -13,7 +13,7 @@
             </div>
             <div class="col-md-6 wi">
 
-              <router-link to="/write_story">
+              <router-link to="/write_story" class="a_text">
                 <i class="el-icon-edit">
                   写故事
                 </i>
@@ -62,7 +62,7 @@
           <div class="row">
             <div class="col-md-3" v-for="item in all_story">
               <div class="size_sre">
-                <router-link :to="'/ery_story/'+item.id">
+                <router-link :to="'/ery_story/'+item.id" class="a_text">
                   <img :src="item.cover_photo+'?imageView2/1/w/300/h/300'" alt="" style="width: 100%;height: 242px;"
                        class="img_sto">
                   {{item.title}}

@@ -45,7 +45,7 @@
               <h5>所有房源</h5>
             </div>
             <div v-for="item in house_data" class="col-md-3">
-            <router-link :to="'/house_material/'+item.id">
+            <router-link :to="'/house_material/'+item.id" class="a_text">
               <div class="size_ho">
                 <img :src="item.photo[0]+'?imageView2/1/w/300/h/300'" alt="" style="width: 100%;height: 100%;">
                 <h5 class="house_title">¥{{item.fixation}}&nbsp; </h5>

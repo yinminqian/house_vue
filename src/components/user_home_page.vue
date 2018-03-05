@@ -53,7 +53,7 @@
             <div class="row">
 
               <div class="col-md-3 story" v-for="item in story">
-                <router-link to="/ery_story/'+item.id">
+                <router-link to="/ery_story/'+item.id" class="a_text">
                   <img :src="item['cover_photo']+'?imageView2/1/w/400/h/400'" alt="" class="life_photo">
                   {{item.title}}
                 </router-link>
@@ -66,7 +66,7 @@
             <h5 class="text_title">房源</h5>
             <div class="row">
               <div class="col-md-3 story" v-for="item in house">
-                <router-link :to="'/house_material/'+item.id">
+                <router-link :to="'/house_material/'+item.id" class="a_text">
                 <img :src="item['photo'][0]+'?imageView2/1/w/400/h/400'" alt="" class="life_photo">
                 {{item.house_title}}
                 </router-link>

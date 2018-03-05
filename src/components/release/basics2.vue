@@ -184,7 +184,7 @@
               <span class="co_bt">决定价格,预定设置</span>
               <br>
 
-              <router-link to="/basics3">
+              <router-link to="/basics3" class="a_text">
                 <el-button type="primary" class="btn_zou">继续</el-button>
               </router-link>
             </div>

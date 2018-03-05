@@ -4,24 +4,24 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6">
-            <router-link to="/" style="text-decoration: none">
+            <router-link to="/" class="a_text">
               <div class="header">你好,爱彼迎</div>
             </router-link>
           </div>
           <div class="col-md-6">
             <div class="header" style="text-align: right">
-              <router-link to="/house_add">
+              <router-link to="/house_add" class="a_text">
                 <el-button type="text" class="header-btn">发布房源</el-button>
               </router-link>
               <el-button type="text" class="header-btn" v-show="! show_login" @click="dialogloginVisible=true">登录
               </el-button>
               <el-button type="text" class="header-btn" v-show="! show_login" @click="dialogsignupVisible = true">注册
               </el-button>
-              <router-link to="/story_all">
+              <router-link to="/story_all" class="a_text">
                 <el-button type="text" class="header-btn">故事</el-button>
               </router-link>
 
-              <router-link to="/admin/home">
+              <router-link to="/admin/home" class="a_text">
                 <el-button type="text" class="header-btn">管理员面板</el-button>
               </router-link>
               <el-button type="text" class="header-btn" v-show="show_login">

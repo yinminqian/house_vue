@@ -66,7 +66,7 @@
       label="操作"
       >
         <template slot-scope="scope">
-          <router-link :to="'/admin/home/house_details/'+scope.row.id">
+          <router-link :to="'/admin/home/house_details/'+scope.row.id" class="a_text">
           <el-button type="text" size="small">查看</el-button>
           </router-link>
         </template>

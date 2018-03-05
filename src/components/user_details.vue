@@ -11,7 +11,7 @@
             <div class="user_bar">对我的评价(开发中)</div>
             <div class="user_bar">我评论过的(开发中)</div>
             <div class="user_bar">
-              <router-link to="/user_home_page">
+              <router-link to="/user_home_page" class="a_text">
 
                 <el-button>查看我的主页</el-button>
               </router-link>

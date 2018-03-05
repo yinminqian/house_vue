@@ -70,7 +70,7 @@
               </div>
               <div class="col-md-10 username">
                 <h5>房东:{{lady.username}}</h5>
-                <router-link to="/user_home_page">
+                <router-link to="/user_home_page" class="a_text">
                 <span>
                   查看主页
                 </span>
