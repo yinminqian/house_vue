@@ -267,6 +267,6 @@
     text-decoration: none;
   }
   a:hover{
-    text-decoraction: none !important;
+    text-decoraction: none;
   }
 </style>
