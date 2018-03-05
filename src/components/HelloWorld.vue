@@ -55,16 +55,22 @@
           <div class="row ">
             <div class="col-md-3">
               <div class="vice_card">
-                <img src="../assets/8b7519ec-2c82-4c09-8233-fd4d2715bbf9.jpg" alt="" class="vice_img">
-                <span class="_th">房源</span>
+<router-link to="/more_house">
+  <img src="../assets/8b7519ec-2c82-4c09-8233-fd4d2715bbf9.jpg" alt="" class="vice_img">
+  <span class="_th">房源</span>
+</router-link>
+
               </div>
             </div>
             <div class="col-md-3">
               <div class="vice_card">
-                <img src="../assets/cb8b3101-d419-4c17-8e2f-4989b39b98c3.jpg" alt="" class="vice_img">
-                <span class="_th">
+                <router-link to="/story_all">
+                  <img src="../assets/cb8b3101-d419-4c17-8e2f-4989b39b98c3.jpg" alt="" class="vice_img">
+                  <span class="_th">
                 故事
               </span>
+                </router-link>
+
               </div>
             </div>
           </div>
