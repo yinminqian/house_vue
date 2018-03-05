@@ -277,8 +277,7 @@
         let me = this;
         this.comment.user_id = this.now_user.id;
         this.comment.article_id = this.story.id;
-        console.log("this.comment", this.comment);
-        Sender.post(cfg.api + '/api/StoryComments/add', this.comment)
+        Sender.post(cfg.api + '/api/Story_comments/add', this.comment)
           .then(function (data) {
             console.log("data", data);
             me.read_comment()
@@ -289,7 +288,7 @@
       },
       read_comment: function () {
         let me = this;
-        Sender.post(cfg.api + '/api/StoryComments/read_comment?article_id=' + this.story.id)
+        Sender.post(cfg.api + '/api/Story_comments/read_comment?article_id=' + this.story.id)
           .then(function (data) {
             console.log("data", data);
             me.comments = data;
@@ -302,7 +301,7 @@
         this.level2_comment.user_id = this.now_user.id;
         this.level2_comment.article_id = this.story.id;
         this.level2_comment.parent_id = item;
-        Sender.post(cfg.api + '/api/StoryComments/add', this.level2_comment)
+        Sender.post(cfg.api + '/api/Story_comments/add', this.level2_comment)
           .then(function (data) {
             me.read_comment()
             me.level2_comment =
