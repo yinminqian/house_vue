@@ -266,4 +266,7 @@
   a{
     text-decoration: none;
   }
+  a:hover{
+    text-decoraction: none !important;
+  }
 </style>
