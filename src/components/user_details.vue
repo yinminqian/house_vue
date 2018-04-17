@@ -232,7 +232,7 @@
       let me = this;
       Sender.post(cfg.api + '/api/house/qiniu')
         .then(function (data) {
-          console.log("data",data);
+
           me.token.token = data;
         })
     },
@@ -244,7 +244,7 @@
         this.user_redact = 1;
       },
       head_img(name) {
-        console.log("name",name);
+
         this.get_user['photo'] ='http://ovygmwfnp.bkt.clouddn.com/' + name.key;
         this.submit_details();
         this.$store.dispatch('is_login');

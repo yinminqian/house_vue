@@ -832,11 +832,11 @@
         this.new_house.house_number = val;
       },
       test: function () {
-        console.log("111", 111);
+
       },
       page_add_() {
         this.new_house.user_id = this.get_user.id;
-        console.log("this.new_house", this.new_house);
+
         this.page++;
       }
     },

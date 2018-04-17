@@ -109,7 +109,7 @@
       Sender.post(cfg.api + '/api/story/read_state')
         .then(function (data) {
           me.all_story = data;
-          console.log("data", data);
+
         })
     }
 

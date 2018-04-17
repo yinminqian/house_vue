@@ -152,7 +152,7 @@
     },
     methods: {
       CheckTel: (rule, value, callback) => {
-        console.log("rule", rule);
+
         if (!value) {
           callback(new Error('请输入电话号码'));
         } else if (!Number.isInteger(value)) {
@@ -187,18 +187,18 @@
           })
       },
       login_btn: function (data) {
-        console.log("data", data);
+
         let me = this;
         Sender.post(cfg.api + '/api/login', data)
           .then(function (item) {
-            console.log("登陆返回值", item);
+
             if (item == 1) {
-              console.log("进入true判断");
+
               me.is_login();
-              console.log("登陆成功");
+
               me.dialogloginVisible = false;
             }else {
-              console.log("进入else错误");
+
             }
           })
       },
@@ -218,11 +218,11 @@
 
 
       is_login: function () {
-        console.log("运行了我is_login");
+
         let me = this;
         Sender.post(cfg.api + '/api/islogin')
           .then(function (data) {
-              console.log("data12121",data);
+
             if (data.success) {
               me.user = data.data;
               me.show_login = data.success;

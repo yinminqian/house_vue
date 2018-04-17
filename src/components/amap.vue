@@ -70,7 +70,7 @@
               let longitude = '';
               let latitude = '';
               su.forEach(function (item, index) {
-                console.log("item",item);
+
                 if (index < 10) {
                   longitude += item;
                 }
@@ -91,7 +91,7 @@
       this.location.city=this.city;
       this.location.street=this.street;
       this.location.plot=this.plot;
-console.log("this.plot",this.plot);
+
       $.get('http://restapi.amap.com/v3/geocode/geo?key=bf5b356d3ffaab642c974983267b1ce8&city=' + this.location.city + '&address=' + this.location.street + this.location.plot)
         .then(function (data) {
           let center_ = data.geocodes[0].location;
@@ -99,7 +99,7 @@ console.log("this.plot",this.plot);
           let longitude = '';
           let latitude = '';
           su.forEach(function (item, index) {
-            console.log("item",item);
+
             if (index < 10) {
               longitude += item;
             }

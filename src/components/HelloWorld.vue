@@ -274,7 +274,7 @@
     methods: {
       inp_tr: function () {
         this.inputte = true;
-        console.log("1", 1);
+
       }
     },
 
@@ -283,13 +283,13 @@
       this.$store.dispatch('is_login')
       Sender.post(`${cfg.api}/api/house/read_house`)
         .then(function (data) {
-          console.log("data", data);
+
           me.house_data = data;
         })
 
       Sender.post(cfg.api + '/api/story/read_state')
         .then(function (data) {
-          console.log("data", data);
+
           me.all_story = data;
         })
     }

@@ -241,26 +241,26 @@
       update_collect: function () {
         Sender.post(cfg.api + '/api/LoveCollect/add?user_id=' + this.now_user.id + '&article_id=' + this.story.id + '&collect=' + Number(this.collect_show))
           .then(function (data) {
-            console.log("data", data);
+
           })
       },
       update_love: function () {
         Sender.post(cfg.api + '/api/LoveCollect/add?user_id=' + this.now_user.id + '&article_id=' + this.story.id + '&love=' + Number(this.love_show))
           .then(function (data) {
-            console.log("data", data);
+
           })
       },
       read_love: function () {
         let me = this;
         Sender.post(cfg.api + '/api/LoveCollect/read_user_love?user_id=' + this.now_user.id + '&article_id=' + this.story.id)
           .then(function (data) {
-            console.log("data", data);
+
             if (data.data[0].love) {
               me.love_show = true
             } else {
               me.love_show = false;
             }
-            console.log("data.data[0].collect", data.data[0].collect);
+
             if (data.data[0].collect) {
               me.collect_show = true
             } else {
@@ -270,7 +270,7 @@
       },
       update_story: function () {
         Sender.post(cfg.api + '/api/story/add', this.story).then(function (data) {
-          console.log("data", data);
+
         })
       },
       btn_comment: function () {
@@ -279,7 +279,7 @@
         this.comment.article_id = this.story.id;
         Sender.post(cfg.api + '/api/Story_comments/add', this.comment)
           .then(function (data) {
-            console.log("data", data);
+
             me.read_comment()
             me.comment = {
               comment: '',
@@ -290,7 +290,7 @@
         let me = this;
         Sender.post(cfg.api + '/api/Story_comments/read_comment?article_id=' + this.story.id)
           .then(function (data) {
-            console.log("data", data);
+
             me.comments = data;
           })
       },

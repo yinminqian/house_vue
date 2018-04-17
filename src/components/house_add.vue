@@ -255,7 +255,7 @@
       },
       //log最终选择
       handleSelect(item) {
-        console.log('11', item);
+
       },
     },
     created: function () {

@@ -115,7 +115,7 @@
     },
     methods: {
       test: function () {
-        console.log("this", this.user_msg);
+
       },
       handleScroll () {
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop

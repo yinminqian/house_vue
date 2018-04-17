@@ -145,10 +145,10 @@
         });
       },
       handleRemove(file, fileList) {
-        console.log(file, fileList);
+
       },
       handlePreview(file) {
-        console.log(file);
+
       },
       head_photo(file) {
         if (file.hash) {
@@ -172,7 +172,7 @@
       sub_save: function () {
         Sender.post(cfg.api + '/api/story/add', this.story)
           .then(function (data) {
-            console.log("data", data);
+
           })
       },
       sub_publish: function () {
@@ -199,10 +199,10 @@
       detailContent: function () {
         this.i++;
         if (Number.isInteger(this.i / 100)) {
-          console.log("保存一次");
+
           Sender.post(cfg.api + '/api/story/add', this.story)
             .then(function (data) {
-              console.log("data", data);
+
             })
         }
 

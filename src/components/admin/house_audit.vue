@@ -109,7 +109,7 @@
       let me = this;
       Sender.post(`${cfg.api}/api/house/read_wait_audit`)
         .then(function (data) {
-          console.log("data", data);
+
           me.tableData5 = data;
         })
     }
